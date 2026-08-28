@@ -6,8 +6,7 @@ import { ApiError } from '../utils/ApiError.js';
 import { signAccessToken, signRefreshToken, verifyRefreshToken } from '../utils/jwt.js';
 import { sendVerificationEmail, sendOrganizerConfirmationEmail } from './emailService.js';
 
-const EMAIL_TOKEN_TTL_MS = 24 * 60 * 60 * 1000; // 24h — used for organizer-request link tokens
-const EMAIL_OTP_TTL_MS = 15 * 60 * 1000; // 15 minutes — email verification code
+const EMAIL_OTP_TTL_MS = 15 * 60 * 1000; // 15 minutes — email verification / organizer-request codes
 
 function generateOtp() {
   return crypto.randomInt(0, 1000000).toString().padStart(6, '0');
@@ -161,7 +160,7 @@ export async function resendVerificationEmail(userId) {
 // separate, deliberate step from general account email verification — so
 // nobody ends up with organizer access just by loading a page (spec intent:
 // "isn't easily becoming an organizer"). Requesting access never grants the
-// role by itself; only clicking the emailed link does.
+// role by itself; only submitting the emailed code does.
 export async function requestOrganizerAccess(userId, { fullName, purpose } = {}) {
   const user = await User.findById(userId);
   if (!user) throw new ApiError(404, 'NOT_FOUND', 'User not found');
@@ -180,16 +179,16 @@ export async function requestOrganizerAccess(userId, { fullName, purpose } = {})
 
   await Verification.deleteMany({ userId: user._id, type: 'organizer_request', status: 'pending' });
 
-  const token = crypto.randomBytes(32).toString('hex');
+  const code = generateOtp();
   await Verification.create({
     userId: user._id,
     type: 'organizer_request',
     status: 'pending',
-    token,
-    expiresAt: new Date(Date.now() + EMAIL_TOKEN_TTL_MS),
+    token: code,
+    expiresAt: new Date(Date.now() + EMAIL_OTP_TTL_MS),
   });
 
-  const result = await sendOrganizerConfirmationEmail(user, token, purpose?.trim());
+  const result = await sendOrganizerConfirmationEmail(user, code, purpose?.trim());
   if (!result.delivered) {
     throw new ApiError(
       502,
@@ -201,32 +200,37 @@ export async function requestOrganizerAccess(userId, { fullName, purpose } = {})
   return { sent: true };
 }
 
-export async function confirmOrganizerAccess(token) {
-  const record = await Verification.findOne({ token, type: 'organizer_request' });
-  if (!record) {
-    throw new ApiError(400, 'INVALID_TOKEN', 'This confirmation link is invalid or expired');
+export async function confirmOrganizerAccess(userId, code) {
+  const user = await User.findById(userId);
+  if (!user) throw new ApiError(404, 'NOT_FOUND', 'User not found');
+
+  // The JWT access token carries the roles claim from whenever it was
+  // issued — updating the DB role alone leaves any already-issued token
+  // stale, so requireRole('organizer') keeps rejecting requests until the
+  // next login. Reissue tokens here so the new role takes effect immediately.
+  if (user.roles.includes('organizer')) {
+    return { confirmed: true, ...issueTokens(user) };
   }
 
-  // Idempotent for the same reason as email verification — link scanners can
-  // consume a one-time token before the person actually clicks it.
-  if (record.status === 'approved') {
-    return { confirmed: true };
+  const record = await Verification.findOne({ userId: user._id, type: 'organizer_request', status: 'pending' }).sort({
+    createdAt: -1,
+  });
+
+  if (!record || record.expiresAt < new Date()) {
+    throw new ApiError(400, 'INVALID_CODE', 'This code has expired. Please request a new one.');
   }
 
-  if (record.expiresAt < new Date()) {
-    throw new ApiError(400, 'INVALID_TOKEN', 'This confirmation link is invalid or expired');
+  if (record.token !== code) {
+    throw new ApiError(400, 'INVALID_CODE', 'That code is incorrect. Please check your email and try again.');
   }
 
   record.status = 'approved';
   await record.save();
 
-  const user = await User.findById(record.userId);
-  if (user && !user.roles.includes('organizer')) {
-    user.roles.push('organizer');
-    await user.save();
-  }
+  user.roles.push('organizer');
+  await user.save();
 
-  return { confirmed: true };
+  return { confirmed: true, ...issueTokens(user) };
 }
 
 // Phone/SMS OTP is stubbed until an SMS gateway with confirmed Somali carrier

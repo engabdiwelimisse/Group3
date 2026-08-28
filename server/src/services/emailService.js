@@ -44,14 +44,12 @@ export async function sendTeamInviteEmail({ inviteEmail, inviterName, campaignTi
   });
 }
 
-export async function sendOrganizerConfirmationEmail(user, token, purpose) {
-  const clientOrigin = (process.env.CLIENT_ORIGIN || '').split(',')[0];
-  const link = `${clientOrigin}/organizer/confirm?token=${token}`;
+export async function sendOrganizerConfirmationEmail(user, code, purpose) {
   return sendEmail({
     to: user.email,
-    subject: 'Xaqiiji codsigaaga organizer — Kaalmo',
+    subject: `${code} waa lambarkaaga xaqiijinta organizer-ka — Kaalmo`,
     html: `<p>Salaan ${user.fullName},</p><p>Waxaad codsatay inaad organizer ka noqoto Kaalmo${
       purpose ? ` si aad u sameyso: "${purpose}"` : ''
-    }.</p><p>Fadlan riix linkiga hoose si aad u xaqiijiso codsigan:</p><p><a href="${link}">${link}</a></p><p>Haddii aanad ahayn adiga, iska indha tir email-kan.</p>`,
+    }.</p><p>Lambarkan geli si aad u xaqiijiso codsigan:</p><p style="font-size:32px;font-weight:bold;letter-spacing:8px;">${code}</p><p>Lambarkani wuxuu dhacayaa 15 daqiiqo gudahood. Haddii aanad ahayn adiga, iska indha tir email-kan.</p>`,
   });
 }

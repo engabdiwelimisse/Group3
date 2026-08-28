@@ -1,6 +1,6 @@
 # Kaalmo — Horumarka Mashruuca (Progress Tracker)
 
-> La cusboonaysiiyay: 2026-08-28 (dhinac lixaad)
+> La cusboonaysiiyay: 2026-08-28 (dhinac sagaalaad)
 > Tani waa faylka lagu raad-raaco waxa la dhisay, waxa socda, iyo waxa weli ku dhiman marka loo eego `kaalmo-web-only-spec.md` iyo `Design_Rules.md`.
 
 ---
@@ -14,6 +14,41 @@
 | **Admin Dashboard** | 🟢 Overview, Campaigns, Verification Queue, Users, **Reports**, Audit Logs — dhab ah; Fraud/Support kaliya ayaa weli preview sample data ah |
 | **Payment Providers** | 🔴 **Ha la taaban** (user si cad u sheegay) — manual/admin-recorded kaliya ayaa jira |
 | **Deployment** | 🔴 Wali lama bilaabin |
+
+## 0c. Bug muhiim ah — la xaliyay (2026-08-28, dhinac sagaalaad)
+
+**Calaamad:** Organizer OTP-gu wuu guulaystay ("confirmed:true", roles-ka DB-gu wuu isbedelay), laakiin marka user-ku isku dayay inuu campaign abuuro, wuxuu helayay `"You do not have permission to perform this action"` — xitaa Navbar-ku wuxuu tusayay "Organizer dashboard".
+
+**Sababta:** JWT access token-ku roles-ka wuxuu ku xardhan yahay **markii token-ku la sameeyay** (login/register time). Marka `confirmOrganizerAccess` uu DB-ga ku daro `organizer` role-ka, token-ka browser-ku sii haysto (oo la sameeyay ka hor) **weli wuxuu sii ahaa** `roles: ['donor']` — JWT-yadu ma isbedelaan iyaga laftooda. `requireRole('organizer')` wuxuu hubiyaa token-ka claim-kiisa, mana hubiyo DB-ga si toos ah, sidaas darteed diiday.
+
+**Xalka:**
+- `confirmOrganizerAccess()` hadda wuxuu soo celiyaa **`accessToken`/`refreshToken` cusub** (`issueTokens(user)`) marka role-ka la daro — isla habka `becomeOrganizer`-kii hore u lahaa (kaas oo OTP-gu bedelay)
+- `AuthContext` waxaa lagu daray `applyTokens()` — wuxuu keydiyaa token-yada cusub `localStorage`, kadibna wuxuu cusboonaysiiyaa `user` state-ka
+- `Onboard.jsx` hadda wuxuu isticmaalaa `applyTokens(data)` halkii uu isticmaali lahaa `refreshUser()` oo kaliya (taasoo GET /users/me kaliya samayn jirtay, token-ka aan beddelin)
+- La tijaabiyay end-to-end (curl): token cusub → campaign abuur **guulaystay**; token hore → sii **fashilmay** sida la filayay (stale claim)
+
+## 0b. Cusboonaysiinta ugu dambeysay (2026-08-28, dhinac siddeedaad)
+
+**Codsi:** "Marka user-ku organizer rabo inuu noqdo, email-ka la diray sidoo kale OTP ka dhig."
+
+- ✅ **Organizer confirmation — laga beddelay link una beddelay 6-digit OTP code** (isku qaab email verification-ka)
+  - `requestOrganizerAccess()` hadda wuxuu soo saaraa OTP code (15 daqiiqo expiry) halkii uu token URL soo saari lahaa
+  - **`POST /users/me/confirm-organizer-access`** (`requireAuth`, `{code}`) halkii uu ahaan lahaa `GET /users/organizer-access/confirm/:token`
+  - `/organizer/confirm` page-kii hore (link-based) waa la tirtiray — `OrganizerConfirm.jsx` waa la saaray
+  - `/organizer/onboard` — ka dib marka form-ka (magaca + ujeeddada) la gudbiyo, isla boggaas ayaa hadda ku muuqda **OTP input form** (isku qaab `/check-email`) — marka code-ku sax noqdo, `refreshUser()` + si toos ah ayaa loogu gudbiyaa `/organizer/new/basics`
+  - La tijaabiyay end-to-end (curl): request → code qaldan → `INVALID_CODE` → code sax ah → `confirmed:true` → roles-ka user-ku hadda waa `['donor','organizer']`
+
+## 0a. Cusboonaysiinta ugu dambeysay (2026-08-28, dhinac todobaad)
+
+**Codsi:** "Email verification hadda ka dhig mid OTP ah, ma ahan link — user-ka bog u geli input-ka geli karo."
+
+- ✅ **Email verification — laga beddelay link una beddelay 6-digit OTP code**
+  - `register()` iyo `resendVerificationEmail()` hadda waxay soo saaraan **lambar 6-god ah** (`generateOtp()`, 15 daqiiqo expiry) halkii ay token URL soo saari lahaayeen
+  - Email-ka wuxuu hadda tusayaa lambarka si cad (font weyn), ma ahan link la riixi karo
+  - **`POST /auth/verify-email-otp`** (`requireAuth`, body `{code}`) — halkii uu ahaan lahaa `GET /auth/verify-email/:token` (public link-consumption)
+  - **`/verify-email` page-kii hore (link-based) waa la tirtiray** — `VerifyEmail.jsx` file-ka waa la saaray, route-ka App.jsx-ka
+  - **`/check-email` page-ka hadda waa OTP entry form** — 6-god input (auto-format numbers-only), "Verify email" button, "Resend" link — dhammaan hal bog, isla markaana marka code-ku saxsanaado, `refreshUser()` ayaa loo yeeraa oo user-ku si toos ah ugu gudbaa app-ka (ma jiro link click ama tab kale)
+  - La tijaabiyay end-to-end (curl + browser dhab ah): wrong code → `INVALID_CODE`, saxda ah → `verified:true`, re-verify (idempotent) → guul, resend → code cusub
 
 ## 0. Cusboonaysiinta ugu dambeysay (2026-08-28, dhinac lixaad)
 

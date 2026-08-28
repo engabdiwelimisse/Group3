@@ -35,10 +35,8 @@ export const requestOrganizerAccessController = asyncHandler(async (req, res) =>
   res.json(result);
 });
 
-// Public — the confirmation link in the email carries the token itself, so
-// no auth is required to complete it (same pattern as email verification).
 export const confirmOrganizerAccessController = asyncHandler(async (req, res) => {
-  const result = await confirmOrganizerAccess(req.params.token);
+  const result = await confirmOrganizerAccess(req.user.id, req.body.code);
   res.json(result);
 });
 

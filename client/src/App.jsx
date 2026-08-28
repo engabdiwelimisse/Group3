@@ -23,7 +23,6 @@ import DonorNotifications from './pages/donor/Notifications';
 import DonorSettings from './pages/donor/Settings';
 
 import OrganizerOnboard from './pages/organizer/Onboard';
-import OrganizerConfirm from './pages/organizer/OrganizerConfirm';
 import OrganizerDashboard from './pages/organizer/Dashboard';
 import CreateCampaignBasics from './pages/organizer/CreateCampaignBasics';
 import CreateCampaignStory from './pages/organizer/CreateCampaignStory';
@@ -74,7 +73,6 @@ export default function App() {
 
       {/* Organizer */}
       <Route path="/organizer/onboard" element={<ProtectedRoute><OrganizerOnboard /></ProtectedRoute>} />
-      <Route path="/organizer/confirm" element={<OrganizerConfirm />} />
       <Route path="/organizer/invites" element={<ProtectedRoute><Invites /></ProtectedRoute>} />
       <Route path="/organizer" element={<ProtectedRoute roles={['organizer', 'admin']}><OrganizerDashboard /></ProtectedRoute>} />
       <Route path="/organizer/new/basics" element={<ProtectedRoute roles={['organizer', 'admin']}><CreateCampaignBasics /></ProtectedRoute>} />

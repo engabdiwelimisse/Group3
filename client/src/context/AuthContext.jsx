@@ -83,10 +83,10 @@ export function AuthProvider({ children }) {
 
   // Re-fetches the current user's profile and updates local state/storage.
   // Needed after actions that change the account server-side but don't
-  // return a fresh user object themselves — e.g. clicking an email
-  // verification link opens a public, unauthenticated endpoint, so the
-  // logged-in session's cached `user.emailVerified` would otherwise stay
-  // stale until the next login.
+  // return a fresh user object themselves — e.g. submitting an email
+  // verification code doesn't return a full user object, so the logged-in
+  // session's cached `user.emailVerified` would otherwise stay stale until
+  // the next login.
   async function refreshUser() {
     if (!localStorage.getItem('kaalmo_access_token')) return null;
     const { data } = await api.get('/users/me');
@@ -95,13 +95,26 @@ export function AuthProvider({ children }) {
     return data;
   }
 
+  // A JWT's roles claim is fixed at issue time — updating the DB role alone
+  // (e.g. confirming organizer access) leaves the token the browser is still
+  // using stale, so role-gated requests keep failing until the next login.
+  // Call this whenever an endpoint returns fresh tokens after a role change,
+  // then refreshUser() to sync the displayed profile too.
+  async function applyTokens({ accessToken, refreshToken }) {
+    localStorage.setItem('kaalmo_access_token', accessToken);
+    localStorage.setItem('kaalmo_refresh_token', refreshToken);
+    await refreshUser();
+  }
+
   function logout() {
     clearSession();
     setUser(null);
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, error, login, register, logout, requestOrganizerAccess, refreshUser }}>
+    <AuthContext.Provider
+      value={{ user, loading, error, login, register, logout, requestOrganizerAccess, refreshUser, applyTokens }}
+    >
       {children}
     </AuthContext.Provider>
   );
