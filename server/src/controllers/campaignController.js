@@ -153,6 +153,34 @@ export const getMyCampaignInteractions = asyncHandler(async (req, res) => {
   res.json({ following: !!following, saved: !!saved });
 });
 
+// Public: last confirmed donations + a supporter count, so a visiting donor
+// can see the campaign is real and active (Design_Rules.md Rule 19 — "how
+// much has been raised" and social proof). Anonymous donors' names are
+// never exposed, matching the promise made at donation time.
+export const listCampaignDonations = asyncHandler(async (req, res) => {
+  const { limit = 10 } = req.query;
+  const campaignId = req.params.id;
+
+  const [donations, supporterCount] = await Promise.all([
+    Donation.find({ campaignId, status: 'confirmed' })
+      .sort({ createdAt: -1 })
+      .limit(Number(limit))
+      .populate('donorId', 'fullName'),
+    Donation.countDocuments({ campaignId, status: 'confirmed' }),
+  ]);
+
+  const items = donations.map((d) => ({
+    _id: d._id,
+    amount: d.amount,
+    currency: d.currency,
+    message: d.message,
+    createdAt: d.createdAt,
+    donorName: d.isAnonymous ? null : d.donorId?.fullName || null,
+  }));
+
+  res.json({ items, supporterCount });
+});
+
 export const listComments = asyncHandler(async (req, res) => {
   const comments = await Comment.find({ campaignId: req.params.id }).sort({ createdAt: -1 });
   res.json(comments);

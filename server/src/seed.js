@@ -7,6 +7,17 @@ import User from './models/User.js';
 import Beneficiary from './models/Beneficiary.js';
 import Campaign from './models/Campaign.js';
 import PayoutAccount from './models/PayoutAccount.js';
+import Donation from './models/Donation.js';
+import Payment from './models/Payment.js';
+import PaymentTransaction from './models/PaymentTransaction.js';
+import Withdrawal from './models/Withdrawal.js';
+import Follow from './models/Follow.js';
+import Bookmark from './models/Bookmark.js';
+import CampaignMember from './models/CampaignMember.js';
+import Notification from './models/Notification.js';
+import Report from './models/Report.js';
+import Verification from './models/Verification.js';
+import AuditLog from './models/AuditLog.js';
 
 const PASSWORD = 'Password123!';
 
@@ -38,6 +49,20 @@ async function seed() {
     Campaign.deleteMany({}),
     Beneficiary.deleteMany({}),
     PayoutAccount.deleteMany({}),
+    // Financial/social records reference campaigns and users wiped above —
+    // clear them wholesale too, otherwise stale rows accumulate across
+    // reseeds (orphaned "—" campaign titles, phantom pending donations).
+    Donation.deleteMany({}),
+    Payment.deleteMany({}),
+    PaymentTransaction.deleteMany({}),
+    Withdrawal.deleteMany({}),
+    Follow.deleteMany({}),
+    Bookmark.deleteMany({}),
+    CampaignMember.deleteMany({}),
+    Notification.deleteMany({}),
+    Report.deleteMany({}),
+    Verification.deleteMany({}),
+    AuditLog.deleteMany({}),
   ]);
 
   console.log('Creating users...');

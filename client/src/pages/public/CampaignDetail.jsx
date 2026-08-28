@@ -17,6 +17,8 @@ export default function CampaignDetail() {
   const { user } = useAuth();
   const [campaign, setCampaign] = useState(null);
   const [updates, setUpdates] = useState([]);
+  const [donations, setDonations] = useState([]);
+  const [supporterCount, setSupporterCount] = useState(0);
   const [status, setStatus] = useState('loading');
   const [following, setFollowing] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -28,10 +30,16 @@ export default function CampaignDetail() {
 
   useEffect(() => {
     setStatus('loading');
-    Promise.all([api.get(`/campaigns/${id}`), api.get(`/campaigns/${id}/updates`)])
-      .then(([campaignRes, updatesRes]) => {
+    Promise.all([
+      api.get(`/campaigns/${id}`),
+      api.get(`/campaigns/${id}/updates`),
+      api.get(`/campaigns/${id}/donations`, { params: { limit: 10 } }),
+    ])
+      .then(([campaignRes, updatesRes, donationsRes]) => {
         setCampaign(campaignRes.data);
         setUpdates(updatesRes.data);
+        setDonations(donationsRes.data.items);
+        setSupporterCount(donationsRes.data.supporterCount);
         setStatus('ready');
       })
       .catch(() => setStatus('error'));
@@ -165,6 +173,34 @@ export default function CampaignDetail() {
           </div>
 
           <div>
+            <h2 className="text-[18px] font-semibold text-text-primary mb-md">
+              Recent donations {supporterCount > 0 && <span className="text-text-secondary font-normal">({supporterCount})</span>}
+            </h2>
+            {donations.length === 0 ? (
+              <EmptyState
+                icon="volunteer_activism"
+                title="No donations yet"
+                description="Be the first to support this campaign."
+              />
+            ) : (
+              <div className="flex flex-col divide-y divide-border border-t border-b border-border">
+                {donations.map((d) => (
+                  <div key={d._id} className="py-md flex items-start justify-between gap-md">
+                    <div className="min-w-0">
+                      <p className="text-[14px] font-medium text-text-primary">{d.donorName || 'Anonymous'}</p>
+                      {d.message && <p className="text-[13px] text-text-secondary mt-xs truncate">{d.message}</p>}
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <p className="text-[14px] font-semibold text-text-primary">${d.amount.toLocaleString()}</p>
+                      <p className="text-[12px] text-text-secondary">{new Date(d.createdAt).toLocaleDateString()}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div>
             <div className="flex items-center justify-between mb-md">
               <h2 className="text-[18px] font-semibold text-text-primary">Updates</h2>
               <button
@@ -199,7 +235,9 @@ export default function CampaignDetail() {
         <div className="lg:col-span-1">
           <div className="sticky top-24 bg-surface border border-border rounded-lg p-xl flex flex-col gap-lg">
             <ProgressBar raised={campaign.raisedAmount} goal={campaign.goalAmount} />
-            <p className="text-[13px] text-text-secondary">Region: {campaign.region || 'Not specified'}</p>
+            <p className="text-[13px] text-text-secondary">
+              {supporterCount} {supporterCount === 1 ? 'supporter' : 'supporters'} · {campaign.region || 'Region not specified'}
+            </p>
 
             <Link to={`/donate/${campaign._id}`}>
               <Button className="w-full">Donate to this campaign</Button>

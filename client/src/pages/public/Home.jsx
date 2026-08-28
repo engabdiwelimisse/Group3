@@ -7,10 +7,22 @@ import StartFundraiserLink from '../../components/StartFundraiserLink';
 import api from '../../api/client';
 import { CATEGORY_ICONS } from './categoryIcons';
 
-const HOW_IT_WORKS = [
-  { icon: 'edit_note', title: 'Create your campaign', text: 'Share your story and set a goal in Somali or English.' },
-  { icon: 'gpp_good', title: 'Get verified', text: 'We confirm the organizer and beneficiary before it goes live.' },
-  { icon: 'volunteer_activism', title: 'Receive support', text: 'Donors give by mobile money or card, and follow your progress.' },
+const TRUST_PILLARS = [
+  {
+    icon: 'verified_user',
+    title: 'Verified organizers',
+    text: 'Every campaign organizer completes identity verification before their campaign can go live.',
+  },
+  {
+    icon: 'account_balance',
+    title: 'Transparent transfers',
+    text: 'Mobile money and card payments are recorded on an immutable ledger — nothing is quietly edited.',
+  },
+  {
+    icon: 'update',
+    title: 'Required updates',
+    text: 'Organizers post progress updates so donors can see how funds are actually being used.',
+  },
 ];
 
 export default function Home() {
@@ -40,18 +52,30 @@ export default function Home() {
 
   return (
     <PageLayout>
-      {/* Hero — headline + immediate search, the primary donor task (find a cause) */}
-      <section className="bg-primary">
-        <div className="max-w-container mx-auto px-xl py-4xl md:py-6xl flex flex-col items-center text-center gap-lg">
-          <h1 className="text-[32px] md:text-[48px] font-bold text-white leading-tight max-w-2xl">
-            Kaalmo is the trusted way for Somalis to raise and give money
+      {/* Hero — full-bleed photo with a dark overlay for text contrast, like a
+          real fundraising platform's hero (not a decorative gradient/blob,
+          Design_Rules.md Rule 6). The image itself must show real people with
+          dignity — Somali communities, families, community projects — never a
+          random stock photo or AI-generated person (Design_Rules.md Rule 20).
+          Falls back to a plain primary-dark surface if /hero.jpg is missing,
+          so the page never breaks waiting on an asset. */}
+      <section
+        className="relative bg-primary-dark bg-cover bg-center min-h-[420px] md:min-h-[520px] flex items-center"
+        style={{
+          backgroundImage:
+            "linear-gradient(90deg, rgba(7,17,20,0.85) 0%, rgba(7,17,20,0.65) 40%, rgba(7,17,20,0.25) 75%, rgba(7,17,20,0) 100%), url(/hero.png)",
+        }}
+      >
+        <div className="max-w-container w-full mx-auto px-lg md:px-xl py-4xl flex flex-col items-start text-left gap-lg">
+          <h1 className="text-[82px] md:text-[68px] font-bold text-white leading-tight max-w-lg">
+            Help someone. Raise hope.
           </h1>
-          <p className="text-[16px] md:text-[18px] text-white/85 max-w-xl">
+          <p className="text-[16px] md:text-[18px] text-white/90 max-w-md">
             Verified organizers, mobile money and card donations, and real updates — built for how
             Somalia actually gives.
           </p>
 
-          <form onSubmit={handleSearch} className="w-full max-w-xl flex flex-col sm:flex-row gap-sm mt-md">
+          <form onSubmit={handleSearch} className="w-full max-w-md flex flex-col sm:flex-row gap-sm mt-md">
             <div className="relative flex-grow">
               <span className="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-text-secondary">
                 search
@@ -59,24 +83,34 @@ export default function Home() {
               <input
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="What are you raising money for?"
-                className="w-full h-[52px] pl-4xl pr-lg rounded bg-white text-text-primary outline-none placeholder:text-text-secondary"
+                placeholder="Search for a person or a cause"
+                className="w-full h-[48px] pl-4xl pr-lg rounded border border-border bg-surface text-text-primary outline-none focus:border-2 focus:border-primary transition-colors placeholder:text-text-secondary"
               />
             </div>
-            <Button type="submit" variant="accent" className="h-[52px] px-2xl">
+            <Button type="submit" className="h-[48px] px-2xl">
               Search
             </Button>
           </form>
 
-          <StartFundraiserLink className="text-[14px] text-white/90 hover:text-white underline underline-offset-2 mt-xs">
-            Or start your own fundraiser
-          </StartFundraiserLink>
+          <div className="flex items-center gap-sm mt-xs">
+            <StartFundraiserLink>
+              <Button variant="accent" className="h-[40px] px-lg">
+                Start a fundraiser
+              </Button>
+            </StartFundraiserLink>
+            <Link
+              to="/explore"
+              className="text-[14px] text-white hover:underline underline-offset-2 px-md"
+            >
+              Browse campaigns
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* Trust stats — real, derivable numbers only (Rule 43); no invented totals */}
-      <section className="border-b border-border bg-surface">
-        <div className="max-w-container mx-auto px-xl py-xl grid grid-cols-1 sm:grid-cols-3 gap-lg text-center">
+      <section className="border-b border-border bg-background">
+        <div className="max-w-container mx-auto px-lg md:px-xl py-xl grid grid-cols-1 sm:grid-cols-3 gap-lg text-center">
           <div>
             <p className="text-[28px] font-bold text-primary">
               {stats ? `$${stats.totalRaised.toLocaleString()}` : '—'}
@@ -94,29 +128,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Category tiles — quick entry into Explore by cause */}
-      <section className="max-w-container mx-auto px-xl py-3xl">
+      {/* Category strip — quick entry into Explore by cause */}
+      <section className="max-w-container mx-auto px-lg md:px-xl py-3xl">
         <h2 className="text-[22px] font-semibold text-text-primary mb-lg">Browse by category</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-md">
+        <div className="flex gap-sm overflow-x-auto pb-xs -mx-lg px-lg md:mx-0 md:px-0 md:flex-wrap">
           {CATEGORY_ICONS.map((c) => (
             <Link
               key={c.label}
               to={`/explore?category=${encodeURIComponent(c.label)}`}
-              className="flex flex-col items-center gap-sm p-lg rounded-lg border border-border bg-surface hover:border-primary hover:bg-primary/5 transition-colors"
+              className="flex items-center gap-sm shrink-0 px-lg py-sm rounded-full border border-border bg-surface hover:border-primary hover:bg-primary/5 transition-colors"
             >
-              <span className="material-symbols-outlined text-primary" style={{ fontSize: 28 }}>
+              <span className="material-symbols-outlined text-primary" style={{ fontSize: 20 }}>
                 {c.icon}
               </span>
-              <span className="text-[13px] font-medium text-text-primary text-center">{c.label}</span>
+              <span className="text-[13px] font-medium text-text-primary whitespace-nowrap">{c.label}</span>
             </Link>
           ))}
         </div>
       </section>
 
       {/* Campaigns to support */}
-      <section className="max-w-container mx-auto px-xl py-3xl border-t border-border">
+      <section className="max-w-container mx-auto px-lg md:px-xl py-3xl border-t border-border">
         <div className="flex items-center justify-between mb-lg">
-          <h2 className="text-[22px] font-semibold text-text-primary">Campaigns to support</h2>
+          <h2 className="text-[22px] font-semibold text-text-primary">Fundraisers to support</h2>
           <Link to="/explore" className="text-[14px] text-primary hover:underline">
             View all
           </Link>
@@ -141,20 +175,25 @@ export default function Home() {
         )}
       </section>
 
-      {/* How it works */}
-      <section className="bg-surface border-t border-border">
-        <div className="max-w-container mx-auto px-xl py-3xl">
-          <h2 className="text-[22px] font-semibold text-text-primary mb-2xl text-center">How Kaalmo works</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2xl">
-            {HOW_IT_WORKS.map((step) => (
-              <div key={step.title} className="flex flex-col items-center text-center gap-sm">
-                <span className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-primary" style={{ fontSize: 26 }}>
-                    {step.icon}
+      {/* How Kaalmo builds trust */}
+      <section className="bg-background border-t border-border">
+        <div className="max-w-container mx-auto px-lg md:px-xl py-3xl">
+          <div className="text-center mb-2xl max-w-xl mx-auto">
+            <h2 className="text-[22px] font-semibold text-text-primary">How Kaalmo builds trust</h2>
+            <p className="text-[14px] text-text-secondary mt-xs">
+              Security and transparency at every step of your giving journey.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-lg">
+            {TRUST_PILLARS.map((pillar) => (
+              <div key={pillar.title} className="bg-surface border border-border rounded-lg p-lg flex flex-col items-center text-center gap-sm">
+                <span className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-primary" style={{ fontSize: 24 }}>
+                    {pillar.icon}
                   </span>
                 </span>
-                <h3 className="text-[16px] font-semibold text-text-primary">{step.title}</h3>
-                <p className="text-[14px] text-text-secondary max-w-xs">{step.text}</p>
+                <h3 className="text-[16px] font-semibold text-text-primary">{pillar.title}</h3>
+                <p className="text-[13px] text-text-secondary">{pillar.text}</p>
               </div>
             ))}
           </div>
@@ -162,7 +201,7 @@ export default function Home() {
       </section>
 
       {/* Closing CTA */}
-      <section className="max-w-container mx-auto px-xl py-4xl text-center flex flex-col items-center gap-lg">
+      <section className="max-w-container mx-auto px-lg md:px-xl py-4xl text-center flex flex-col items-center gap-lg">
         <h2 className="text-[24px] font-bold text-text-primary max-w-lg">
           Something to raise? Start your fundraiser today.
         </h2>

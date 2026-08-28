@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext';
 // the one-click onboarding (redirected to /check-email first if their email
 // isn't verified yet); already an organizer -> their dashboard
 // (Design_Rules.md Rule 32 — reflect the user's actual state).
-export default function StartFundraiserLink({ children, className }) {
+export default function StartFundraiserLink({ children, className, onClick }) {
   const { user } = useAuth();
   const isOrganizer = user?.roles?.includes('organizer');
 
@@ -14,7 +14,7 @@ export default function StartFundraiserLink({ children, className }) {
   if (user) to = isOrganizer ? '/organizer' : '/organizer/onboard';
 
   return (
-    <Link to={to} className={className}>
+    <Link to={to} className={className} onClick={onClick}>
       {children}
     </Link>
   );

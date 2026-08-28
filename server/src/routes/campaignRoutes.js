@@ -31,6 +31,7 @@ router.get('/:id/comments', campaignController.listComments);
 router.post('/:id/comments', requireAuth, validate(createCommentSchema), campaignController.postComment);
 
 router.post('/:id/donate', optionalAuth, donationRateLimiter, donationController.createDonation);
+router.get('/:id/donations', campaignController.listCampaignDonations);
 
 router.get('/:id/interactions', requireAuth, campaignController.getMyCampaignInteractions);
 router.post('/:id/follow', requireAuth, campaignController.followCampaign);

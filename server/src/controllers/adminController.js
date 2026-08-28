@@ -28,12 +28,32 @@ export const listAllCampaigns = asyncHandler(async (req, res) => {
   res.json({ items, total, page: Number(page), limit: Number(limit) });
 });
 
-// Admin-recorded confirmation for the 'manual' provider — the MVP fallback
-// until a real mobile-money/card/bank provider is integrated (spec Section 14).
-export const confirmManualPayment = asyncHandler(async (req, res) => {
-  const { paymentId } = req.params;
-  const { providerTransactionId } = req.body;
+// Lets admins see and act on donations awaiting manual confirmation — the
+// missing piece that made confirmManualPayment below only reachable by
+// calling the API directly (spec Section 14/24).
+export const listDonations = asyncHandler(async (req, res) => {
+  const { status, page = 1, limit = 20 } = req.query;
+  const filter = {};
+  if (status) filter.status = status;
 
+  const skip = (Number(page) - 1) * Number(limit);
+  const [items, total] = await Promise.all([
+    Donation.find(filter)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(Number(limit))
+      .populate('campaignId', 'title')
+      .populate('donorId', 'fullName email')
+      .populate('paymentId', 'provider status'),
+    Donation.countDocuments(filter),
+  ]);
+
+  res.json({ items, total, page: Number(page), limit: Number(limit) });
+});
+
+// Shared by the single-payment and bulk endpoints below — confirms one
+// manual payment and its linked donation, returns what changed.
+async function confirmOneManualPayment(paymentId, providerTransactionId, adminId) {
   const payment = await Payment.findById(paymentId);
   if (!payment) throw new ApiError(404, 'NOT_FOUND', 'Payment not found');
   if (payment.provider !== 'manual') {
@@ -49,17 +69,15 @@ export const confirmManualPayment = asyncHandler(async (req, res) => {
   const { transaction } = await PaymentService.confirmPayment('manual', {
     paymentId: payment._id,
     providerTransactionId,
-    adminId: req.user.id,
+    adminId,
   });
 
   donation.status = 'confirmed';
   donation.paymentTransactionId = transaction._id;
   await donation.save();
 
-  const raisedAmount = await recomputeRaisedAmount(donation.campaignId);
-
   await logAudit({
-    actorId: req.user.id,
+    actorId: adminId,
     action: 'payment.confirmed',
     targetType: 'Donation',
     targetId: donation._id,
@@ -76,7 +94,42 @@ export const confirmManualPayment = asyncHandler(async (req, res) => {
     });
   }
 
+  return donation;
+}
+
+// Admin-recorded confirmation for the 'manual' provider — the MVP fallback
+// until a real mobile-money/card/bank provider is integrated (spec Section 14).
+export const confirmManualPayment = asyncHandler(async (req, res) => {
+  const donation = await confirmOneManualPayment(req.params.paymentId, req.body.providerTransactionId, req.user.id);
+  const raisedAmount = await recomputeRaisedAmount(donation.campaignId);
   res.json({ donation, raisedAmount });
+});
+
+// Confirming donations one-by-one doesn't scale once a campaign has
+// hundreds or thousands of manual donations — this lets an admin select a
+// batch (e.g. after reconciling a day's worth of mobile money transfers)
+// and confirm them in one action. Each payment is still validated
+// individually; one bad id in the batch doesn't block the rest.
+export const confirmManualPaymentsBatch = asyncHandler(async (req, res) => {
+  const { paymentIds } = req.body;
+
+  const results = [];
+  const affectedCampaignIds = new Set();
+
+  for (const paymentId of paymentIds) {
+    try {
+      const donation = await confirmOneManualPayment(paymentId, undefined, req.user.id);
+      affectedCampaignIds.add(String(donation.campaignId));
+      results.push({ paymentId, ok: true, donationId: donation._id });
+    } catch (err) {
+      results.push({ paymentId, ok: false, error: err.message || 'Could not confirm this payment' });
+    }
+  }
+
+  await Promise.all([...affectedCampaignIds].map((campaignId) => recomputeRaisedAmount(campaignId)));
+
+  const confirmedCount = results.filter((r) => r.ok).length;
+  res.json({ confirmedCount, failedCount: results.length - confirmedCount, results });
 });
 
 const CAMPAIGN_ACTION_MESSAGES = {

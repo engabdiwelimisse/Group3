@@ -1,6 +1,6 @@
 # Kaalmo — Horumarka Mashruuca (Progress Tracker)
 
-> La cusboonaysiiyay: 2026-08-28 (dhinac sagaalaad)
+> La cusboonaysiiyay: 2026-08-28 (dhinac kow-iyo-tobnaad)
 > Tani waa faylka lagu raad-raaco waxa la dhisay, waxa socda, iyo waxa weli ku dhiman marka loo eego `kaalmo-web-only-spec.md` iyo `Design_Rules.md`.
 
 ---
@@ -14,6 +14,37 @@
 | **Admin Dashboard** | 🟢 Overview, Campaigns, Verification Queue, Users, **Reports**, Audit Logs — dhab ah; Fraud/Support kaliya ayaa weli preview sample data ah |
 | **Payment Providers** | 🔴 **Ha la taaban** (user si cad u sheegay) — manual/admin-recorded kaliya ayaa jira |
 | **Deployment** | 🔴 Wali lama bilaabin |
+
+## 0e. Feature cusub (2026-08-28, dhinac kow-iyo-tobnaad)
+
+**Codsi:** "Campaign walba donation-yadii ugu dambeeyay + tirada qofka ka qeyb qaatay la muujiyo. Mida kale: haddii 1000 qof donation sameeyaan, admin-ku mid-mid u aqbalidoodu way adag tahay — xal keen."
+
+### 1. Campaign Detail — "Recent donations" + supporter count
+- ✅ **`GET /campaigns/:id/donations`** (public) — soo celisa 10-kii donation ee ugu dambeeyay (confirmed kaliya) + `supporterCount` (tirada donation-yada la xaqiijiyay). Magaca donor-ka anonymous ah lama muujiyo (waa la ilaaliyaa ballan-qaadkii donation-ka lagu siiyay)
+- ✅ Campaign Detail page: qeyb cusub "Recent donations (N)" oo tusaysa magaca/Anonymous, message-ka, lacagta, taariikhda — iyo "N supporters" oo ku dhow progress bar-ka
+- La tijaabiyay browser dhab ah: donation cusub → admin confirm → campaign page-ku isla markiiba wuxuu tusayaa "$50 · Barakat iyo caafimaad! · 1 supporter"
+
+### 2. Admin Donations — Bulk confirm (xalka dhibaatada 1000 donation)
+- ✅ **`POST /admin/payments/confirm-batch`** — aqbal liis `paymentIds`, mid kasta si madax-banaan ayaa loo xaqiijiyaa (mid fashilma kuwa kale kuma xanibo), `raisedAmount` campaign kasta oo saameeyay hal mar ayaa la dib-xisaabiyaa
+- ✅ Admin Donations page: checkbox kasta oo saf ah + "select all" header-ka, bar cusub oo muujisa "N selected" + "Confirm N selected", modal xaqiijin ah, natiijo cad (X confirmed / Y failed oo error-yada la muujiyo)
+- Hadda admin-ku wuxuu dooran karaa 50-100 donation hal mar (page kasta), waxaana loo baahan yahay dhowr click oo kaliya halkii uu 1000 modal kala qaadi lahaa
+- La tijaabiyay end-to-end (curl + browser): 3 donation oo hal mar la xaqiijiyay, `confirmedCount:3, failedCount:0`
+
+### Fiiro celin: Talo mustaqbal ah
+Marka la helo real payment provider (EVC Plus/eDahab), habka "manual confirm" (mid-mid ama batch) wuu iska baabi'i doonaa — webhook-yada provider-ku si otomaatig ah ayay u xaqiijin doonaan donation-yada, iyada oo aan admin toos ahaan loo baahnayn. Ilaa markaas, bulk-confirm-ku waa xalka ugu wanaagsan ee available-ka ah scale-ka sare.
+
+## 0d. Bug muhiim ah — la xaliyay (2026-08-28, dhinac tobnaad)
+
+**Calaamad:** Donation-yadu "pending" ayay ku sii xiran yihiin — user-ku wuxuu weydiiyay yaa xaqiijinaya donation-ka, halka admin-ku uu ka xaqiijinayo, oo sheegay "sidaas uma eka mid sax ah."
+
+**Sababta run ah:** `POST /admin/payments/:paymentId/confirm` endpoint-ku backend-ka wuu jiray oo la tijaabiyay curl kaliya — laakiin **ma jirin bog frontend ah** oo admin-ku ku arki karo donation-yada pending-ka ah! Habka kaliya ee la confirm gareyn karay wuxuu ahaa API call toos ah.
+
+**Xalka:**
+- ✅ **`GET /admin/donations`** — endpoint cusub (filter by status: pending/confirmed/failed/refunded), populate campaign+donor+payment
+- ✅ **Bog cusub — Admin > Donations** (`/admin/donations`) — table leh Date/Campaign/Donor/Amount/Method/Status/Action, tabs status-ka, modal xaqiijin ah oo tusaya amount+campaign+donor ka hor "Confirm payment" (Design_Rules.md Rule 15/16 — financial confirmation)
+- ✅ Admin Overview KPI cusub: "Donations awaiting confirmation" oo isku xiran bogga cusub
+- ✅ **Bug kale oo la helay oo la xaliyay**: `seed.js` ma tirtirin jirin `Donation`/`Payment`/`Withdrawal`/`Follow`/etc marka la dib-seed-gareeyo — sidaas darteed test data qadiimi ah ayaa isugu ururi jiray (safaf "—" oo campaign tirtiran leh). Hadda seed-ku dhammaan collections-ka macaamilka/bulshada wuu tirtiraa
+- La tijaabiyay end-to-end browser dhab ah: donation guest ah → admin donations page → confirm modal → xaqiijin → status wuxuu u gudbay "Confirmed" isla markiiba
 
 ## 0c. Bug muhiim ah — la xaliyay (2026-08-28, dhinac sagaalaad)
 

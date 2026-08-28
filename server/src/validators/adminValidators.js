@@ -8,3 +8,7 @@ export const reviewCampaignSchema = z.object({
 export const confirmPaymentSchema = z.object({
   providerTransactionId: z.string().optional(),
 });
+
+export const confirmPaymentsBatchSchema = z.object({
+  paymentIds: z.array(z.string()).min(1).max(500),
+});

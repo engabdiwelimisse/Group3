@@ -36,6 +36,7 @@ import Verification from './pages/beneficiary/Verification';
 
 import AdminOverview from './pages/admin/Overview';
 import AdminCampaigns from './pages/admin/Campaigns';
+import AdminDonations from './pages/admin/Donations';
 import VerificationQueue from './pages/admin/VerificationQueue';
 import UserManagement from './pages/admin/UserManagement';
 import AdminReports from './pages/admin/Reports';
@@ -88,6 +89,7 @@ export default function App() {
       {/* Admin */}
       <Route path="/admin" element={<ProtectedRoute roles={['admin']}><AdminOverview /></ProtectedRoute>} />
       <Route path="/admin/campaigns" element={<ProtectedRoute roles={['admin']}><AdminCampaigns /></ProtectedRoute>} />
+      <Route path="/admin/donations" element={<ProtectedRoute roles={['admin']}><AdminDonations /></ProtectedRoute>} />
       <Route path="/admin/verification" element={<ProtectedRoute roles={['admin']}><VerificationQueue /></ProtectedRoute>} />
       <Route path="/admin/users" element={<ProtectedRoute roles={['admin']}><UserManagement /></ProtectedRoute>} />
       <Route path="/admin/reports" element={<ProtectedRoute roles={['admin']}><AdminReports /></ProtectedRoute>} />

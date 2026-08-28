@@ -44,6 +44,11 @@ export default function CampaignCard({ campaign }) {
         <p className="text-[13px] text-text-secondary">{campaign.region}</p>
         <div className="mt-auto pt-sm flex flex-col gap-xs">
           <ProgressBar raised={campaign.raisedAmount} goal={campaign.goalAmount} />
+          {typeof campaign.donorCount === 'number' && (
+            <p className="text-[12px] text-text-secondary">
+              {campaign.donorCount} {campaign.donorCount === 1 ? 'supporter' : 'supporters'}
+            </p>
+          )}
         </div>
       </div>
     </Link>

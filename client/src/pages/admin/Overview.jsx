@@ -15,11 +15,13 @@ export default function AdminOverview() {
       api.get('/admin/campaigns', { params: { status: 'under_review', limit: 1 } }),
       api.get('/admin/campaigns', { params: { status: 'active', limit: 1 } }),
       api.get('/admin/beneficiaries', { params: { status: 'pending' } }),
-    ]).then(([submitted, review, active, beneficiaries]) => {
+      api.get('/admin/donations', { params: { status: 'pending', limit: 1 } }),
+    ]).then(([submitted, review, active, beneficiaries, donations]) => {
       setCounts({
         awaitingReview: submitted.data.total + review.data.total,
         active: active.data.total,
         pendingVerification: beneficiaries.data.length,
+        pendingDonations: donations.data.total,
       });
     });
   }, []);
@@ -29,7 +31,11 @@ export default function AdminOverview() {
       <div className="flex flex-col gap-2xl">
         <h1 className="text-[24px] font-bold text-text-primary">Overview</h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-lg">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-lg">
+          <Link to="/admin/donations?status=pending" className="bg-surface border border-border rounded-lg p-lg hover:border-primary/40 transition-colors">
+            <p className="text-[13px] text-text-secondary">Donations awaiting confirmation</p>
+            <p className="text-[28px] font-bold text-text-primary">{counts ? counts.pendingDonations : '—'}</p>
+          </Link>
           <Link to="/admin/campaigns?status=submitted" className="bg-surface border border-border rounded-lg p-lg hover:border-primary/40 transition-colors">
             <p className="text-[13px] text-text-secondary">Campaigns awaiting review</p>
             <p className="text-[28px] font-bold text-text-primary">{counts ? counts.awaitingReview : '—'}</p>
@@ -45,7 +51,7 @@ export default function AdminOverview() {
         </div>
 
         <p className="text-[13px] text-text-secondary bg-background border border-border rounded-lg p-lg">
-          Fraud queue, financial ledger totals, and payment success-rate metrics are not tracked yet —
+          Fraud queue and payment success-rate metrics are not tracked yet —
           see the Fraud &amp; Risk and Support sections for their current (sample) state.
         </p>
       </div>
