@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Donate to Ayaan's Treatment - Kaalmo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#f3be52",
+                        "on-primary-fixed": "#001f28",
+                        "on-error": "#ffffff",
+                        "primary": "#00576b",
+                        "tertiary-fixed-dim": "#88d6af",
+                        "inverse-primary": "#82d1ec",
+                        "on-surface-variant": "#3f484c",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-primary-container": "#c2eeff",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#131d1d",
+                        "outline": "#6f797d",
+                        "secondary": "#7b5800",
+                        "on-background": "#131d1d",
+                        "inverse-surface": "#283232",
+                        "primary-fixed-dim": "#82d1ec",
+                        "surface-container-low": "#ebf6f5",
+                        "surface-container": "#e5f0ef",
+                        "tertiary": "#005c3d",
+                        "surface": "#f0fcfb",
+                        "secondary-container": "#fcc759",
+                        "on-secondary-fixed-variant": "#5d4200",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#00677e",
+                        "on-tertiary-container": "#a9f8ce",
+                        "primary-container": "#0b7189",
+                        "on-secondary-container": "#735200",
+                        "outline-variant": "#bec8cc",
+                        "secondary-fixed": "#ffdea4",
+                        "surface-container-highest": "#dae5e4",
+                        "on-secondary-fixed": "#261900",
+                        "tertiary-fixed": "#a4f3ca",
+                        "surface-variant": "#dae5e4",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-dim": "#d1dcdc",
+                        "inverse-on-surface": "#e8f3f2",
+                        "tertiary-container": "#247554",
+                        "surface-bright": "#f0fcfb",
+                        "primary-fixed": "#b4ebff",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#dfeaea",
+                        "background": "#f0fcfb",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "gutter": "24px",
+                        "lg": "24px",
+                        "container-max": "1200px",
+                        "xxl": "48px",
+                        "base": "8px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "numeric-data": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "numeric-data": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-surface-dim docked full-width top-0 border-b border-outline-variant dark:border-outline flat no shadows flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-16 sticky z-50">
+<div class="flex items-center gap-lg">
+<a class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim tracking-tight" href="#">Kaalmo</a>
+<div class="hidden md:flex gap-md">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors py-sm px-xs" href="#">Explore</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors py-sm px-xs" href="#">How It Works</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors py-sm px-xs" href="#">Safety</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors py-sm px-xs" href="#">Categories</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors py-sm px-xs" href="#">About</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<span class="hidden md:inline font-body-sm text-body-sm text-on-surface-variant">Somali | English</span>
+<a class="hidden md:inline-flex items-center justify-center font-label-md text-label-md font-medium px-md py-sm rounded-lg bg-surface-container-low text-primary border border-outline-variant hover:bg-surface-container transition-colors" href="#">Start a fundraiser</a>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-sm rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center p-md md:p-xl">
+<!-- Donation Container -->
+<div class="w-full max-w-2xl bg-surface-container-lowest rounded-xl border border-outline-variant p-lg md:p-xl mx-auto shadow-sm">
+<!-- Header Section -->
+<div class="text-center mb-xl">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-sm">Donate to Ayaan's Treatment</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Your contribution brings hope and healing.</p>
+</div>
+<!-- Stepper Indicator -->
+<div class="flex items-center justify-center gap-sm mb-xl">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md font-bold">1</div>
+<div class="h-1 w-12 bg-outline-variant rounded-full"></div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant border border-outline-variant flex items-center justify-center font-label-md text-label-md font-bold">2</div>
+<div class="h-1 w-12 bg-outline-variant rounded-full"></div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant border border-outline-variant flex items-center justify-center font-label-md text-label-md font-bold">3</div>
+<div class="h-1 w-12 bg-outline-variant rounded-full"></div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant border border-outline-variant flex items-center justify-center font-label-md text-label-md font-bold">4</div>
+</div>
+<!-- Step 1: Amount Selection -->
+<div class="space-y-lg" id="step-1">
+<h2 class="font-headline-sm text-headline-sm text-on-surface border-b border-outline-variant pb-sm">Select Amount</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+<button class="amount-btn w-full py-md rounded-lg border border-outline-variant bg-surface hover:bg-surface-container transition-colors font-numeric-data text-numeric-data text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">$10</button>
+<button class="amount-btn w-full py-md rounded-lg border-2 border-primary bg-primary-container/10 transition-colors font-numeric-data text-numeric-data text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">$25</button>
+<button class="amount-btn w-full py-md rounded-lg border border-outline-variant bg-surface hover:bg-surface-container transition-colors font-numeric-data text-numeric-data text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">$50</button>
+<button class="amount-btn w-full py-md rounded-lg border border-outline-variant bg-surface hover:bg-surface-container transition-colors font-numeric-data text-numeric-data text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">$100</button>
+</div>
+<div class="mt-md relative">
+<label class="absolute -top-2.5 left-3 bg-surface-container-lowest px-1 font-label-md text-label-md text-on-surface-variant" for="custom-amount">Custom Amount</label>
+<div class="relative flex items-center">
+<span class="absolute left-md font-numeric-data text-numeric-data text-on-surface-variant">$</span>
+<input class="w-full pl-[40px] pr-md py-md rounded-lg border border-outline-variant bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-numeric-data text-numeric-data text-on-surface placeholder-outline" id="custom-amount" placeholder="Enter amount" type="number"/>
+</div>
+</div>
+<div class="flex justify-end pt-md">
+<button class="bg-primary hover:bg-primary/90 text-on-primary font-label-md text-label-md font-bold py-md px-xl rounded-lg transition-colors flex items-center gap-xs">
+                        Continue
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant dark:border-outline flat no shadows full-width bottom mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl px-gutter py-xxl max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<span class="font-headline-sm text-headline-sm font-bold text-primary mb-md block tracking-tight">Kaalmo</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 Kaalmo Somalia. Human-centered Trust.</p>
+</div>
+<div class="md:col-span-3 flex flex-wrap gap-md md:justify-end">
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-90 hover:opacity-100" href="#">About</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-90 hover:opacity-100" href="#">Safety</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-90 hover:opacity-100" href="#">Help Center</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-90 hover:opacity-100" href="#">Legal</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-90 hover:opacity-100" href="#">Terms</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-90 hover:opacity-100" href="#">Privacy</a>
+</div>
+</div>
+</footer>
+</body></html>

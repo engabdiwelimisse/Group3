@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kaalmo Somalia - Admin Panel: User Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#ffdea4",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#283232",
+                    "secondary-fixed-dim": "#f3be52",
+                    "surface-container-highest": "#dae5e4",
+                    "on-secondary-fixed": "#261900",
+                    "tertiary": "#005c3d",
+                    "on-primary-container": "#c2eeff",
+                    "primary": "#00576b",
+                    "outline-variant": "#bec8cc",
+                    "surface-variant": "#dae5e4",
+                    "surface-tint": "#00677e",
+                    "inverse-on-surface": "#e8f3f2",
+                    "on-secondary-container": "#735200",
+                    "surface-container-low": "#ebf6f5",
+                    "surface-container-high": "#dfeaea",
+                    "on-secondary-fixed-variant": "#5d4200",
+                    "tertiary-fixed-dim": "#88d6af",
+                    "primary-fixed": "#b4ebff",
+                    "background": "#f0fcfb",
+                    "inverse-primary": "#82d1ec",
+                    "on-surface-variant": "#3f484c",
+                    "on-primary-fixed-variant": "#004e5f",
+                    "surface-dim": "#d1dcdc",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#001f28",
+                    "secondary": "#7b5800",
+                    "outline": "#6f797d",
+                    "on-tertiary-container": "#a9f8ce",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#0b7189",
+                    "surface": "#f0fcfb",
+                    "surface-container": "#e5f0ef",
+                    "on-tertiary-fixed": "#002113",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#82d1ec",
+                    "on-surface": "#131d1d",
+                    "tertiary-fixed": "#a4f3ca",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#f0fcfb",
+                    "secondary-container": "#fcc759",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "tertiary-container": "#247554",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#131d1d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "gutter": "24px",
+                    "lg": "24px",
+                    "sm": "8px",
+                    "xxl": "48px",
+                    "container-max": "1200px",
+                    "base": "8px",
+                    "md": "16px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "numeric-data": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "numeric-data": ["20px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="h-full bg-background font-body-md text-on-surface flex overflow-hidden">
+<!-- Sidebar Admin Panel -->
+<aside class="hidden md:flex bg-surface-container-highest flex-col h-full w-72 shadow-md p-lg gap-md shrink-0 z-10 relative border-r border-outline-variant">
+<div class="flex items-center gap-md mb-lg">
+<div class="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-outline-variant bg-surface">
+<img alt="Admin User" class="w-full h-full object-cover" data-alt="Close-up professional headshot of a Somali administrative user. They are wearing business casual attire. The lighting is bright and even, conveying a sense of authority and approachability in a modern corporate setting. Neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqfscMAPS86RxxrpdrmGaurdrSO1BhTuVhfjaedVLeuqtZe71rzDklnBz3-IgNzWgHtQ2K3wVxT658WbMssxARsCIQaJwmxoJdUU5GbF1N-4xZ1Ly63h0Iz_bkDLH9ahrmMwo1GzzAbHS2h9zH6biNVsPu3krfhZOqLCBAagqklYFmUu7IM_LHDZmgvWCWxiSUrlpTsQ7RSLZgs52ovvA1sH9-OBuSzzHuWgsk194Twgowon-B0lDd"/>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-primary">Admin Panel</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Operations Control</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-sm overflow-y-auto pr-sm custom-scrollbar">
+<!-- Active Tab Placeholder matching intent - Using Campaign Review as default for Admin if no exact match, but this is a user management page. Creating a semantic match for "Users" although it wasn't explicitly in the JSON array, assuming Campaign Review is the closest related to general operations if strictly bound. We'll use Campaign Review as inactive and create a semantic active state. Actually, rule says: "ONLY use semantic intent if there is no direct match". We'll default to the first if we must, or create the ones from the JSON. Let's render the JSON ones. -->
+<a class="flex items-center gap-md p-md rounded-lg bg-primary text-on-primary scale-98 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">manage_accounts</span>
+<span class="font-label-md text-label-md">User Management</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">rate_review</span>
+<span class="font-label-md text-label-md">Campaign Review</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-label-md text-label-md">Verification Queue</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">gpp_bad</span>
+<span class="font-label-md text-label-md">Fraud &amp; Risk</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+<span class="font-label-md text-label-md">Audit Logs</span>
+</a>
+</nav>
+<div class="pt-md border-t border-outline-variant mt-auto">
+<button class="flex w-full items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Sign Out</span>
+</button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background">
+<!-- Header -->
+<header class="h-20 bg-surface border-b border-outline-variant flex items-center justify-between px-xl shrink-0">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">User Management</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">View and manage system users, verification statuses, and roles.</p>
+</div>
+<div class="flex items-center gap-md">
+<button class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="bg-primary-container text-on-primary h-10 px-md rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    Add User
+                </button>
+</div>
+</header>
+<!-- Canvas -->
+<div class="flex-1 overflow-auto p-xl">
+<div class="max-w-[1400px] mx-auto space-y-lg">
+<!-- Filters & Search Bento Box -->
+<div class="bg-surface rounded-xl border border-outline-variant p-lg grid grid-cols-1 md:grid-cols-12 gap-md items-end">
+<div class="md:col-span-4 flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Search Users</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full h-10 pl-10 pr-md rounded-lg border border-outline-variant bg-surface-container-lowest text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Name, email, or ID..." type="text"/>
+</div>
+</div>
+<div class="md:col-span-2 flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Role</label>
+<select class="w-full h-10 px-md rounded-lg border border-outline-variant bg-surface-container-lowest text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none">
+<option>All Roles</option>
+<option>Donor</option>
+<option>Organizer</option>
+<option>Beneficiary</option>
+</select>
+</div>
+<div class="md:col-span-2 flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Status</label>
+<select class="w-full h-10 px-md rounded-lg border border-outline-variant bg-surface-container-lowest text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none">
+<option>All Statuses</option>
+<option>Verified</option>
+<option>Pending</option>
+<option>Flagged</option>
+</select>
+</div>
+<div class="md:col-span-4 flex justify-end gap-sm h-10">
+<button class="px-md h-full rounded-lg border border-outline-variant text-primary font-label-md text-label-md hover:bg-surface-container transition-colors flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                            More Filters
+                        </button>
+<button class="px-md h-full rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors">
+                            Clear
+                        </button>
+</div>
+</div>
+<!-- Data Table Glassmorphism-lite -->
+<div class="bg-surface rounded-xl border border-outline-variant overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="py-md px-lg font-label-md text-label-md text-on-surface-variant font-semibold">User</th>
+<th class="py-md px-lg font-label-md text-label-md text-on-surface-variant font-semibold">Role</th>
+<th class="py-md px-lg font-label-md text-label-md text-on-surface-variant font-semibold">Status</th>
+<th class="py-md px-lg font-label-md text-label-md text-on-surface-variant font-semibold">Joined</th>
+<th class="py-md px-lg font-label-md text-label-md text-on-surface-variant font-semibold text-right">Volume</th>
+<th class="py-md px-lg font-label-md text-label-md text-on-surface-variant font-semibold text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="py-md px-lg">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="Portrait of a young Somali man smiling gently. He is outdoors with soft natural lighting, dressed casually but neatly. The background is slightly blurred indicating a community setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDyUhpTZJct8fV1zksxjhY2RXY7IOD7qX2ZxqUPKhvhkh5H6sYlTpAr9w-_mTwyknFBAyX2vnOka2aSrl9eQWZWB0fzfjFHHYL7P7TsHAW9RymkHcThy9pTGAZaoTv5Lm4_O7MtR7xPpNhI2qVm2MruAzJipRa2T9Z6Hb9cP0s-N2w3O60s0JjjMArQxF4VHsbjN9eZ1tvefk48KWnUFIKbs4afbs-0ipmmc32rVXuclWd4iRPW6_X"/>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">Ahmed Jama</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">ahmed.j@example.com</div>
+</div>
+</div>
+</td>
+<td class="py-md px-lg">
+<span class="inline-flex items-center px-sm py-xs rounded bg-surface-container-high text-on-surface-variant font-label-md text-label-md">
+                                            Organizer
+                                        </span>
+</td>
+<td class="py-md px-lg">
+<div class="flex items-center gap-xs text-tertiary">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span class="font-label-md text-label-md">Verified</span>
+</div>
+</td>
+<td class="py-md px-lg font-body-sm text-body-sm text-on-surface-variant">
+                                        Oct 12, 2023
+                                    </td>
+<td class="py-md px-lg text-right font-numeric-data text-numeric-data text-on-surface">
+                                        $12,450
+                                        <div class="font-body-sm text-body-sm text-on-surface-variant font-normal">raised</div>
+</td>
+<td class="py-md px-lg text-center">
+<button class="p-xs rounded text-outline hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="py-md px-lg">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-headline-sm">
+                                                F
+                                            </div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">Fadumo Ali</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">f.ali88@mail.com</div>
+</div>
+</div>
+</td>
+<td class="py-md px-lg">
+<span class="inline-flex items-center px-sm py-xs rounded bg-secondary-container text-on-secondary-container font-label-md text-label-md">
+                                            Donor
+                                        </span>
+</td>
+<td class="py-md px-lg">
+<div class="flex items-center gap-xs text-outline">
+<span class="material-symbols-outlined text-[16px]">pending</span>
+<span class="font-label-md text-label-md">Pending ID</span>
+</div>
+</td>
+<td class="py-md px-lg font-body-sm text-body-sm text-on-surface-variant">
+                                        Jan 05, 2024
+                                    </td>
+<td class="py-md px-lg text-right font-numeric-data text-numeric-data text-on-surface">
+                                        $340
+                                        <div class="font-body-sm text-body-sm text-on-surface-variant font-normal">donated</div>
+</td>
+<td class="py-md px-lg text-center">
+<button class="p-xs rounded text-outline hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="py-md px-lg">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A portrait of an older Somali woman wearing a colorful traditional hijab. She looks dignified and calm. The lighting is soft studio lighting against a clean, off-white background, emphasizing a sense of respect and trust." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEbTYJiEoLmZMzoHgPoIl-2IdGW9E0BxM_tinSV8gTW4wQQ-h5iAq1U_Ktd0_bMIbjZ5dXAMWw611edFyRanjafo23eJZKcKT3xBMu5IHsYZkr80T_CzQpU_Lx02xWdCbTzVCk5pJioSM5nd6MxJgHmlWTf-ovupUCkt_xvwAOo9HIHBgbSlEypb1_9e1G6GGC7qUC7IM3NmTLaCl2XbrXdDsfoArveIMnca0okpgZgAnk9jeJtkQx"/>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">Halima Hassan</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">h.hassan@example.com</div>
+</div>
+</div>
+</td>
+<td class="py-md px-lg">
+<span class="inline-flex items-center px-sm py-xs rounded bg-tertiary-container text-on-tertiary-container font-label-md text-label-md">
+                                            Beneficiary
+                                        </span>
+</td>
+<td class="py-md px-lg">
+<div class="flex items-center gap-xs text-tertiary">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span class="font-label-md text-label-md">Verified</span>
+</div>
+</td>
+<td class="py-md px-lg font-body-sm text-body-sm text-on-surface-variant">
+                                        Nov 22, 2023
+                                    </td>
+<td class="py-md px-lg text-right font-numeric-data text-numeric-data text-on-surface">
+                                        $4,200
+                                        <div class="font-body-sm text-body-sm text-on-surface-variant font-normal">received</div>
+</td>
+<td class="py-md px-lg text-center">
+<button class="p-xs rounded text-outline hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="border-t border-outline-variant bg-surface p-md flex items-center justify-between">
+<div class="font-body-sm text-body-sm text-on-surface-variant">
+                            Showing <span class="font-label-md text-on-surface">1</span> to <span class="font-label-md text-on-surface">3</span> of <span class="font-label-md text-on-surface">1,240</span> results
+                        </div>
+<div class="flex gap-xs">
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-outline hover:bg-surface-container transition-colors opacity-50 cursor-not-allowed">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded border border-primary bg-primary-container text-on-primary-container flex items-center justify-center font-label-md">
+                                1
+                            </button>
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors font-label-md">
+                                2
+                            </button>
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors font-label-md">
+                                3
+                            </button>
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

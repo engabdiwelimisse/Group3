@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Campaign Details - Kaalmo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#735200",
+                      "on-secondary-fixed-variant": "#5d4200",
+                      "on-error-container": "#93000a",
+                      "outline": "#6f797d",
+                      "error": "#ba1a1a",
+                      "primary-container": "#0b7189",
+                      "on-secondary-fixed": "#261900",
+                      "background": "#f0fcfb",
+                      "secondary-fixed": "#ffdea4",
+                      "secondary": "#7b5800",
+                      "surface": "#f0fcfb",
+                      "on-tertiary-container": "#a9f8ce",
+                      "tertiary-container": "#247554",
+                      "on-surface": "#131d1d",
+                      "tertiary-fixed-dim": "#88d6af",
+                      "on-background": "#131d1d",
+                      "on-tertiary-fixed": "#002113",
+                      "error-container": "#ffdad6",
+                      "on-error": "#ffffff",
+                      "primary-fixed": "#b4ebff",
+                      "surface-variant": "#dae5e4",
+                      "surface-container-high": "#dfeaea",
+                      "secondary-fixed-dim": "#f3be52",
+                      "surface-bright": "#f0fcfb",
+                      "tertiary": "#005c3d",
+                      "inverse-on-surface": "#e8f3f2",
+                      "outline-variant": "#bec8cc",
+                      "on-primary-fixed-variant": "#004e5f",
+                      "surface-container-highest": "#dae5e4",
+                      "primary-fixed-dim": "#82d1ec",
+                      "on-primary-fixed": "#001f28",
+                      "surface-tint": "#00677e",
+                      "tertiary-fixed": "#a4f3ca",
+                      "secondary-container": "#fcc759",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "surface-container": "#e5f0ef",
+                      "on-primary-container": "#c2eeff",
+                      "inverse-primary": "#82d1ec",
+                      "on-surface-variant": "#3f484c",
+                      "on-tertiary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "inverse-surface": "#283232",
+                      "surface-dim": "#d1dcdc",
+                      "surface-container-low": "#ebf6f5",
+                      "on-secondary": "#ffffff",
+                      "primary": "#00576b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xxl": "48px",
+                      "xl": "32px",
+                      "lg": "24px",
+                      "md": "16px",
+                      "xs": "4px",
+                      "gutter": "24px",
+                      "container-max": "1200px",
+                      "sm": "8px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "display-lg-mobile": ["Inter"],
+                      "headline-sm": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "label-md": ["Inter"],
+                      "numeric-data": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "numeric-data": ["20px", {"lineHeight": "24px", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { background-color: #F8FAF9; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.filled { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="font-body-md text-on-surface antialiased min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flat no shadows docked full-width top-0 z-50 sticky">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-xl">
+<a class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim" href="#">Kaalmo</a>
+<div class="hidden md:flex items-center bg-surface-container-low rounded-full px-4 py-2 border border-outline-variant focus-within:border-primary-container">
+<span class="material-symbols-outlined text-outline mr-2 text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm text-on-surface w-48 outline-none" placeholder="Search campaigns..." type="text"/>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-lg h-full">
+<a class="h-full flex items-center text-primary dark:text-primary-fixed font-bold border-b-2 border-primary" href="#">Explore</a>
+<a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors opacity-80 hover:opacity-100 duration-150" href="#">How It Works</a>
+<a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors opacity-80 hover:opacity-100 duration-150" href="#">Safety</a>
+<a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors opacity-80 hover:opacity-100 duration-150" href="#">Categories</a>
+<a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors opacity-80 hover:opacity-100 duration-150" href="#">About</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="hidden md:block text-body-sm text-on-surface-variant hover:text-primary transition-colors">Somali | English</button>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors">Start a fundraiser</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center p-2 rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[24px]" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full px-gutter max-w-container-max mx-auto py-xl">
+<!-- Campaign Header -->
+<div class="mb-lg">
+<div class="flex items-center gap-sm mb-sm">
+<span class="bg-surface-container-high text-primary px-3 py-1 rounded-full font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">medical_services</span> Medical
+                </span>
+<span class="text-on-surface-variant flex items-center gap-1 font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">location_on</span> Hargeisa, Somalia
+                </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-md">Help Ayaan Complete Her Cancer Treatment</h1>
+<div class="flex flex-wrap items-center justify-between gap-md border-b border-outline-variant pb-md">
+<div class="flex items-center gap-3">
+<img class="w-12 h-12 rounded-full object-cover border border-outline-variant" data-alt="A portrait photograph of a young Somali man in a clean, minimalist setting. The lighting is soft and natural, conveying trustworthiness and warmth. He wears simple, smart-casual attire appropriate for a professional profile. The overall aesthetic is clean, modern, and respectful, aligning with a reliable corporate identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfNlVSNQGTlbp48OlbwRqqaUxmUuEANV8vBOwAmR3zRJqm8DpnADxyVhPyJTcYtAIkTsXYNJKaNCmi1QP_nwNXT7Ls-ncRFJwHy31fEO5fscIADUSbJgWY4Nabmi1UNoHKr9cd33NAnPVlF-yyEE2o8-NFvLiPeYibjIs5ZizSQ_L5pLwYVrtLbJOXpbncH-2ri35mN2fh5kQS18_j-FX6TIR1lpa4DiGobaFVDioC1lVC0Eqh5VAa"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Organized by Ibrahim Hersi</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Created 3 days ago</p>
+</div>
+</div>
+<div class="flex gap-sm">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border border-outline-variant text-primary hover:bg-surface-container-low transition-colors font-label-md">
+<span class="material-symbols-outlined text-[20px]">share</span> Share
+                    </button>
+<button class="flex items-center justify-center w-10 h-10 rounded-lg border border-outline-variant text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 2-Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl relative">
+<!-- Left Column: Story & Updates -->
+<div class="lg:col-span-8 flex flex-col gap-lg">
+<!-- Cover Image -->
+<div class="w-full rounded-xl overflow-hidden border border-outline-variant relative">
+<img class="w-full h-[400px] object-cover" data-alt="A respectful, sensitive photograph of a hospital room setting in Hargeisa. The scene shows medical equipment and a comfortable bed, but focuses on the feeling of care and hope rather than distress. Soft, natural sunlight streams through a window, illuminating a bouquet of flowers or a thoughtful get-well card on a bedside table. The color palette is muted and calming, with warm whites and gentle blues, emphasizing dignity and healing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1W_w1wU3mctLjy3W42oC3177ye7c2vMMgT1QQdoF0zO1yPW1HUl-S64EgF96auc3vqJXj0wq9EMxN-RvxUNKAfYZCX1CSg_tJrgoUB1_quI94JTYF7SN3QvumOGOMDEOyj0wdkpHusGu0Cc05NBwNnVtCh_RSHlKFonHDoavWeulx7C4vLXvt0wxAdX1TPCOaOsodMl5SV2IQfJUEJTXJPLmMSme9Nbk2sVNjit743Qtk4xNPHK3v"/>
+</div>
+<!-- Tabs -->
+<div class="border-b border-outline-variant flex gap-lg">
+<button class="font-label-md text-label-md text-primary border-b-2 border-primary pb-2 px-2">Story</button>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary pb-2 px-2 transition-colors">Updates (1)</button>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary pb-2 px-2 transition-colors">Comments (12)</button>
+</div>
+<!-- Story Content -->
+<div class="prose max-w-none text-on-surface font-body-lg text-body-lg leading-relaxed">
+<p class="mb-4">My name is Ibrahim, and I am starting this campaign for my sister, Ayaan. Recently, Ayaan was diagnosed with Stage II breast cancer. As a vibrant 32-year-old teacher and mother of two, this news has devastated our family, but we are determined to fight this together.</p>
+<h3 class="font-headline-sm text-headline-sm mt-8 mb-4">The Treatment Plan</h3>
+<p class="mb-4">Ayaan's medical team in Hargeisa has outlined a comprehensive treatment plan that includes surgery followed by a series of chemotherapy sessions. While the hospital provides excellent care, the costs of the specific chemotherapy drugs and the surgical procedure are beyond what our family can afford on our own.</p>
+<h3 class="font-headline-sm text-headline-sm mt-8 mb-4">How Your Contribution Helps</h3>
+<p class="mb-4">The total cost for the complete treatment cycle is estimated at $20,000. We have exhausted our savings and received incredible support from our immediate community, raising $15,000 so far. We are now reaching out for help to bridge the remaining $5,000 gap.</p>
+<ul class="list-disc pl-5 mb-4 space-y-2">
+<li><strong>Surgery:</strong> Scheduled for next month to remove the tumor.</li>
+<li><strong>Chemotherapy:</strong> 6 cycles over the next 6 months.</li>
+<li><strong>Medication &amp; Aftercare:</strong> Essential support for her recovery process.</li>
+</ul>
+<p>Every contribution, no matter the size, brings Ayaan one step closer to recovery and returning to her classroom and her children. Thank you for your generosity, prayers, and for sharing her story.</p>
+</div>
+</div>
+<!-- Right Column: Sticky Sidebar -->
+<div class="lg:col-span-4 relative">
+<div class="sticky top-24 flex flex-col gap-lg">
+<!-- Donation Panel -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg flex flex-col gap-md">
+<div class="flex justify-between items-end mb-2">
+<span class="font-numeric-data text-numeric-data text-primary">$15,000 <span class="font-body-md text-body-md text-on-surface-variant font-normal">raised</span></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">of $20,000 goal</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-surface-variant rounded-full h-2 mb-2 overflow-hidden">
+<div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+                            124 Donors
+                        </div>
+<button class="w-full bg-[#D8A63C] text-[#172121] py-3 rounded-lg font-headline-sm text-headline-sm hover:opacity-90 transition-opacity flex justify-center items-center gap-2">
+                            Donate Now
+                        </button>
+</div>
+<!-- Trust Card -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant p-md">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[#D8A63C] filled text-[24px]">verified</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Verified Campaign</h3>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-[20px] mt-0.5">check_circle</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Identity Verified</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Organizer's government ID confirmed.</p>
+</div>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary text-[20px] mt-0.5">check_circle</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Beneficiary Verified</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Funds go directly to the medical facility.</p>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant">
+<a class="text-primary font-label-md text-label-md hover:underline flex items-center gap-1" href="#">Learn about our trust &amp; safety <span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant dark:border-outline flat no shadows full-width bottom mt-xxl">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-xl px-gutter py-xxl max-w-container-max mx-auto">
+<div>
+<a class="font-headline-sm text-headline-sm font-bold text-primary mb-md block" href="#">Kaalmo</a>
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 Kaalmo Somalia. Human-centered Trust.</p>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors opacity-90 hover:opacity-100" href="#">About</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors opacity-90 hover:opacity-100" href="#">Safety</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors opacity-90 hover:opacity-100" href="#">Help Center</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors opacity-90 hover:opacity-100" href="#">Legal</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors opacity-90 hover:opacity-100" href="#">Terms</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors opacity-90 hover:opacity-100" href="#">Privacy</a>
+</div>
+</div>
+</footer>
+</body></html>

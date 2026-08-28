@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audit Logs - Kaalmo Admin Panel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error-container": "#93000a",
+                      "secondary-fixed": "#ffdea4",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-surface": "#283232",
+                      "secondary-fixed-dim": "#f3be52",
+                      "surface-container-highest": "#dae5e4",
+                      "on-secondary-fixed": "#261900",
+                      "tertiary": "#005c3d",
+                      "on-primary-container": "#c2eeff",
+                      "primary": "#00576b",
+                      "outline-variant": "#bec8cc",
+                      "surface-variant": "#dae5e4",
+                      "surface-tint": "#00677e",
+                      "inverse-on-surface": "#e8f3f2",
+                      "on-secondary-container": "#735200",
+                      "surface-container-low": "#ebf6f5",
+                      "surface-container-high": "#dfeaea",
+                      "on-secondary-fixed-variant": "#5d4200",
+                      "tertiary-fixed-dim": "#88d6af",
+                      "primary-fixed": "#b4ebff",
+                      "background": "#f0fcfb",
+                      "inverse-primary": "#82d1ec",
+                      "on-surface-variant": "#3f484c",
+                      "on-primary-fixed-variant": "#004e5f",
+                      "surface-dim": "#d1dcdc",
+                      "on-error": "#ffffff",
+                      "on-primary-fixed": "#001f28",
+                      "secondary": "#7b5800",
+                      "outline": "#6f797d",
+                      "on-tertiary-container": "#a9f8ce",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#0b7189",
+                      "surface": "#f0fcfb",
+                      "surface-container": "#e5f0ef",
+                      "on-tertiary-fixed": "#002113",
+                      "error-container": "#ffdad6",
+                      "primary-fixed-dim": "#82d1ec",
+                      "on-surface": "#131d1d",
+                      "tertiary-fixed": "#a4f3ca",
+                      "on-tertiary": "#ffffff",
+                      "error": "#ba1a1a",
+                      "surface-bright": "#f0fcfb",
+                      "secondary-container": "#fcc759",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "tertiary-container": "#247554",
+                      "on-secondary": "#ffffff",
+                      "on-background": "#131d1d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "gutter": "24px",
+                      "lg": "24px",
+                      "sm": "8px",
+                      "xxl": "48px",
+                      "container-max": "1200px",
+                      "base": "8px",
+                      "md": "16px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "numeric-data": [
+                              "Inter"
+                      ],
+                      "display-lg-mobile": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "numeric-data": [
+                              "20px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Base styles to ensure consistency */
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden font-body-md text-body-md">
+<!-- Admin SideNavBar -->
+<nav aria-label="Sidebar Navigation" class="bg-surface-container-highest dark:bg-inverse-surface shadow-md h-screen w-72 flex flex-col p-lg gap-md shrink-0 hidden md:flex">
+<!-- Header Info -->
+<div class="flex items-center gap-md pb-md border-b border-outline-variant mb-sm">
+<img class="w-12 h-12 rounded-full object-cover border border-outline-variant" data-alt="A small, professional avatar portrait of a mature Somali administrative worker in a crisp white shirt against a neutral gray background. The lighting is bright and even, conveying a modern corporate setting. The style is realistic photography with a focus on trust and authority." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4XQ1p2eCkoy6cMQ7_Mfcg-GpUvz-kXNtnVEr5h6qfTJ41Whd_m3P98faYKVEjHNwXaTuLncVjGp-JSDMiz0le0WJmYvD-WMtZBHJZNIP0dQDi-v4yhK01W1VRiJaIXI5WrL5DtiCXZD-qrYA92j2vvgT4YF3pWjFGPfEpFxpMRymALuSouFLCisS5t4xVwArNJQfumlmYmiK1KEqkvPrXQORT6WjThY1waCdWD5KjFcCdsc71iAc4"/>
+<div>
+<h2 class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed">Admin Panel</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">Operations Control</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<ul class="flex flex-col gap-sm flex-1">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-surface-container-high scale-98 on click transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="rate_review" data-weight="fill" style="font-variation-settings: 'FILL' 1;">rate_review</span>
+<span class="font-label-md text-label-md">Campaign Review</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-surface-container-high scale-98 on click transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-md text-label-md">Verification Queue</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-surface-container-high scale-98 on click transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="gpp_bad" data-weight="fill" style="font-variation-settings: 'FILL' 1;">gpp_bad</span>
+<span class="font-label-md text-label-md">Fraud &amp; Risk</span>
+</a>
+</li>
+<li>
+<a aria-current="page" class="flex items-center gap-md px-md py-sm bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container rounded-lg scale-98 on click transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu" data-weight="fill" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+<span class="font-label-md text-label-md">Audit Logs</span>
+</a>
+</li>
+</ul>
+<!-- Bottom Actions -->
+<div class="mt-auto pt-md border-t border-outline-variant">
+<button class="flex items-center gap-md px-md py-sm w-full rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 text-left">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Sign Out</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background">
+<!-- Header -->
+<header class="h-16 flex items-center justify-between px-gutter border-b border-outline-variant bg-surface shrink-0">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">System Audit Logs</h1>
+<div class="flex items-center gap-md">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-xl pr-md py-xs rounded-lg border border-outline-variant bg-surface-container-lowest text-body-sm font-body-sm focus:border-primary focus:ring-1 focus:ring-primary w-64" placeholder="Search logs..." type="text"/>
+</div>
+<button aria-label="Notifications" class="p-xs rounded-full hover:bg-surface-variant text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Content Area -->
+<div class="flex-1 overflow-y-auto p-xl">
+<div class="max-w-container-max mx-auto space-y-lg">
+<!-- Filters Bar -->
+<div class="bg-surface-container-lowest p-md rounded-lg border border-outline-variant flex flex-wrap gap-md items-center justify-between shadow-sm">
+<div class="flex gap-md flex-wrap items-center">
+<select class="border-outline-variant border rounded-md py-xs px-sm text-body-sm font-body-sm bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary">
+<option>All Event Types</option>
+<option>Authentication</option>
+<option>Campaign Modification</option>
+<option>Financial Transaction</option>
+<option>Admin Action</option>
+</select>
+<select class="border-outline-variant border rounded-md py-xs px-sm text-body-sm font-body-sm bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary">
+<option>Last 24 Hours</option>
+<option>Last 7 Days</option>
+<option>Last 30 Days</option>
+<option>Custom Range...</option>
+</select>
+</div>
+<button class="flex items-center gap-xs px-md py-sm bg-surface-container-highest rounded-md hover:bg-surface-variant text-on-surface-variant transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined" style="font-size: 18px;">download</span>
+                        Export CSV
+                    </button>
+</div>
+<!-- Data Table Container -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="py-sm px-md font-label-md text-label-md text-on-surface-variant font-medium whitespace-nowrap">Timestamp (UTC)</th>
+<th class="py-sm px-md font-label-md text-label-md text-on-surface-variant font-medium">Actor</th>
+<th class="py-sm px-md font-label-md text-label-md text-on-surface-variant font-medium">Event / Action</th>
+<th class="py-sm px-md font-label-md text-label-md text-on-surface-variant font-medium">Target Resource</th>
+<th class="py-sm px-md font-label-md text-label-md text-on-surface-variant font-medium">IP Address &amp; Context</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1: Approval -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group cursor-pointer">
+<td class="py-md px-md text-body-sm font-body-sm text-on-surface whitespace-nowrap">
+<div class="flex items-center gap-sm">
+<span class="text-on-surface">2024-05-20</span>
+<span class="text-on-surface-variant text-[12px]">14:23:45</span>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-6 h-6 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-md text-[10px]">AD</div>
+<div>
+<div class="text-body-sm font-body-sm text-on-surface font-medium">admin.sarah</div>
+<div class="text-[12px] text-on-surface-variant">System Admin</div>
+</div>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="inline-flex items-center gap-xs px-2 py-1 rounded bg-tertiary-container/20 text-tertiary font-label-md text-[12px]">
+<span class="material-symbols-outlined" style="font-size: 14px;">check_circle</span>
+                                            Campaign Approved
+                                        </div>
+</td>
+<td class="py-md px-md text-body-sm font-body-sm text-on-surface">
+<a class="text-primary hover:underline font-medium" href="#">CMP-9932-XYZ</a>
+<div class="text-[12px] text-on-surface-variant truncate w-48">Clean Water for Jowhar</div>
+</td>
+<td class="py-md px-md">
+<div class="text-body-sm font-body-sm text-on-surface-variant font-mono text-[13px]">192.168.1.105</div>
+<div class="text-[12px] text-outline">Chrome / macOS</div>
+</td>
+</tr>
+<!-- Row 2: Withdrawal -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group cursor-pointer">
+<td class="py-md px-md text-body-sm font-body-sm text-on-surface whitespace-nowrap">
+<div class="flex items-center gap-sm">
+<span class="text-on-surface">2024-05-20</span>
+<span class="text-on-surface-variant text-[12px]">13:10:22</span>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-label-md text-[10px]">SY</div>
+<div>
+<div class="text-body-sm font-body-sm text-on-surface font-medium">SYSTEM</div>
+<div class="text-[12px] text-on-surface-variant">Automated Job</div>
+</div>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="inline-flex items-center gap-xs px-2 py-1 rounded bg-secondary-container/20 text-secondary font-label-md text-[12px]">
+<span class="material-symbols-outlined" style="font-size: 14px;">payments</span>
+                                            Withdrawal Released
+                                        </div>
+</td>
+<td class="py-md px-md text-body-sm font-body-sm text-on-surface">
+<a class="text-primary hover:underline font-medium" href="#">WD-1045-ABC</a>
+<div class="text-[12px] text-on-surface-variant">$2,500.00 to Dahabshiil</div>
+</td>
+<td class="py-md px-md">
+<div class="text-body-sm font-body-sm text-on-surface-variant font-mono text-[13px]">10.0.0.5</div>
+<div class="text-[12px] text-outline">Internal Network</div>
+</td>
+</tr>
+<!-- Row 3: Security Alert -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group cursor-pointer bg-error-container/5">
+<td class="py-md px-md text-body-sm font-body-sm text-on-surface whitespace-nowrap">
+<div class="flex items-center gap-sm">
+<span class="text-on-surface">2024-05-20</span>
+<span class="text-on-surface-variant text-[12px]">11:45:00</span>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-6 h-6 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-label-md text-[10px]">?</div>
+<div>
+<div class="text-body-sm font-body-sm text-on-surface font-medium">Unknown User</div>
+<div class="text-[12px] text-on-surface-variant">Unauthenticated</div>
+</div>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="inline-flex items-center gap-xs px-2 py-1 rounded bg-error-container text-on-error-container font-label-md text-[12px]">
+<span class="material-symbols-outlined" style="font-size: 14px;">warning</span>
+                                            Failed Login (x5)
+                                        </div>
+</td>
+<td class="py-md px-md text-body-sm font-body-sm text-on-surface">
+<span class="font-medium text-on-surface">Target: admin.david</span>
+<div class="text-[12px] text-on-surface-variant">Authentication Service</div>
+</td>
+<td class="py-md px-md">
+<div class="text-body-sm font-body-sm text-error font-mono text-[13px]">185.12.34.88</div>
+<div class="text-[12px] text-outline">Firefox / Windows (VPN detected)</div>
+</td>
+</tr>
+<!-- Row 4: Setting Change -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group cursor-pointer">
+<td class="py-md px-md text-body-sm font-body-sm text-on-surface whitespace-nowrap">
+<div class="flex items-center gap-sm">
+<span class="text-on-surface">2024-05-20</span>
+<span class="text-on-surface-variant text-[12px]">09:15:33</span>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-6 h-6 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-md text-[10px]">AD</div>
+<div>
+<div class="text-body-sm font-body-sm text-on-surface font-medium">admin.sarah</div>
+<div class="text-[12px] text-on-surface-variant">System Admin</div>
+</div>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="inline-flex items-center gap-xs px-2 py-1 rounded bg-surface-container-highest text-on-surface font-label-md text-[12px]">
+<span class="material-symbols-outlined" style="font-size: 14px;">settings</span>
+                                            Config Updated
+                                        </div>
+</td>
+<td class="py-md px-md text-body-sm font-body-sm text-on-surface">
+<span class="font-medium text-on-surface">Platform Fees</span>
+<div class="text-[12px] text-on-surface-variant">Changed from 2.5% to 2.0%</div>
+</td>
+<td class="py-md px-md">
+<div class="text-body-sm font-body-sm text-on-surface-variant font-mono text-[13px]">192.168.1.105</div>
+<div class="text-[12px] text-outline">Chrome / macOS</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="bg-surface-container-low px-md py-sm border-t border-outline-variant flex items-center justify-between">
+<span class="text-body-sm font-body-sm text-on-surface-variant">Showing 1-4 of 1,248 logs</span>
+<div class="flex gap-xs">
+<button class="p-xs rounded hover:bg-surface-variant text-on-surface-variant disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined" style="font-size: 20px;">chevron_left</span>
+</button>
+<button class="p-xs rounded hover:bg-surface-variant text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-size: 20px;">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

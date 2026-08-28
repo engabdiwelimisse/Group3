@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kaalmo - Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#735200",
+                        "on-secondary-fixed-variant": "#5d4200",
+                        "on-error-container": "#93000a",
+                        "outline": "#6f797d",
+                        "error": "#ba1a1a",
+                        "primary-container": "#0b7189",
+                        "on-secondary-fixed": "#261900",
+                        "background": "#f0fcfb",
+                        "secondary-fixed": "#ffdea4",
+                        "secondary": "#7b5800",
+                        "surface": "#f0fcfb",
+                        "on-tertiary-container": "#a9f8ce",
+                        "tertiary-container": "#247554",
+                        "on-surface": "#131d1d",
+                        "tertiary-fixed-dim": "#88d6af",
+                        "on-background": "#131d1d",
+                        "on-tertiary-fixed": "#002113",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#b4ebff",
+                        "surface-variant": "#dae5e4",
+                        "surface-container-high": "#dfeaea",
+                        "secondary-fixed-dim": "#f3be52",
+                        "surface-bright": "#f0fcfb",
+                        "tertiary": "#005c3d",
+                        "inverse-on-surface": "#e8f3f2",
+                        "outline-variant": "#bec8cc",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "surface-container-highest": "#dae5e4",
+                        "primary-fixed-dim": "#82d1ec",
+                        "on-primary-fixed": "#001f28",
+                        "surface-tint": "#00677e",
+                        "tertiary-fixed": "#a4f3ca",
+                        "secondary-container": "#fcc759",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-container": "#e5f0ef",
+                        "on-primary-container": "#c2eeff",
+                        "inverse-primary": "#82d1ec",
+                        "on-surface-variant": "#3f484c",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#283232",
+                        "surface-dim": "#d1dcdc",
+                        "surface-container-low": "#ebf6f5",
+                        "on-secondary": "#ffffff",
+                        "primary": "#00576b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xxl": "48px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "container-max": "1200px",
+                        "sm": "8px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "numeric-data": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "numeric-data": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-highest dark:bg-inverse-surface shadow-md docked-left h-screen w-72 flex flex-col h-full p-lg gap-md flex-shrink-0 z-20">
+<div class="mb-lg">
+<div class="flex items-center gap-md">
+<img class="w-12 h-12 rounded-full object-cover border border-outline-variant" data-alt="A small, professional avatar placeholder image featuring a neutral gray abstract geometric pattern, representing an administrative user profile in a clean, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXf-DDA8uUgxiId0qM1n93nivuXBdiGNYAUORyN6O5lHZOq7ZvYfjNEkfC3RHVm-DHL3XDVdwQwONOvgw0seW6AyJOreBE54JdhZpTgFA0fjZlYQ5G4h1tFzON4TxB0zZmTCdZos5aF2SOafA2-1xaYLkU0L6MF52uoFxopAD2QDhJx4CXH8JhL7YUeikx379Vmc_AuTq73MfMHni7uZBzMnkSJxk6Nvfue-n9Pfl9X6mN68Y5RFTy"/>
+<div>
+<h2 class="font-headline-sm text-headline-sm font-bold text-primary">Admin Panel</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">Operations Control</p>
+</div>
+</div>
+</div>
+<ul class="flex flex-col gap-sm flex-grow">
+<!-- Active: Campaign Review -->
+<li>
+<a class="flex items-center gap-md px-md py-sm bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container rounded-lg scale-98 transition-transform font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="rate_review" data-weight="fill" style="font-variation-settings: 'FILL' 1;">rate_review</span>
+                    Campaign Review
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-surface-container-high rounded-lg transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+                    Verification Queue
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-surface-container-high rounded-lg transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="gpp_bad">gpp_bad</span>
+                    Fraud &amp; Risk
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-surface-container-high rounded-lg transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+                    Audit Logs
+                </a>
+</li>
+</ul>
+<div class="mt-auto pt-lg border-t border-outline-variant">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Sign Out
+            </a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow p-xl md:p-xxl flex flex-col gap-xl overflow-y-auto">
+<header class="flex justify-between items-center pb-md border-b border-outline-variant">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Operations Overview</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Monitor platform activity, pending reviews, and risk alerts.</p>
+</div>
+<div class="flex gap-md">
+<button class="bg-surface-container-lowest border border-outline-variant rounded-lg px-md py-sm flex items-center gap-sm font-label-md text-label-md text-primary hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                    Export Report
+                </button>
+</div>
+</header>
+<!-- KPI Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-sm">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label-md text-label-md">Active Campaigns</span>
+<span class="material-symbols-outlined text-primary-container" data-icon="campaign">campaign</span>
+</div>
+<div class="font-numeric-data text-numeric-data text-on-surface text-3xl">1,248</div>
+<div class="font-body-sm text-body-sm text-tertiary-container flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span> +12% this week
+                </div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-sm">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label-md text-label-md">Verification Queue</span>
+<span class="material-symbols-outlined text-secondary-container" data-icon="pending_actions">pending_actions</span>
+</div>
+<div class="font-numeric-data text-numeric-data text-on-surface text-3xl">84</div>
+<div class="font-body-sm text-body-sm text-error flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm" data-icon="warning">warning</span> High volume
+                </div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-sm">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label-md text-label-md">Pending Withdrawals</span>
+<span class="material-symbols-outlined text-primary-container" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<div class="font-numeric-data text-numeric-data text-on-surface text-3xl">$45,210</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs">
+                    32 requests processing
+                </div>
+</div>
+<div class="bg-surface-container-lowest border border-error-container rounded-xl p-lg flex flex-col gap-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 bg-error-container rounded-bl-full opacity-50"></div>
+<div class="flex justify-between items-center text-on-surface-variant z-10">
+<span class="font-label-md text-label-md">Open Fraud Cases</span>
+<span class="material-symbols-outlined text-error" data-icon="gpp_bad" data-weight="fill" style="font-variation-settings: 'FILL' 1;">gpp_bad</span>
+</div>
+<div class="font-numeric-data text-numeric-data text-on-surface text-3xl z-10">7</div>
+<div class="font-body-sm text-body-sm text-error flex items-center gap-xs z-10 font-medium">
+                    Immediate action required
+                </div>
+</div>
+</section>
+<!-- Middle Row: Charts & Priority Queue -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Chart Area (Mock) -->
+<div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-lg">7-Day Donation Volume</h3>
+<div class="flex-grow flex items-end justify-between gap-sm relative pt-xl">
+<!-- Simple CSS Mock Chart -->
+<div class="w-full flex justify-between items-end h-48 border-b border-l border-outline-variant pb-xs pl-xs relative">
+<div class="w-1/12 bg-primary-container rounded-t-sm h-1/3 hover:bg-primary transition-colors group relative cursor-pointer">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface font-label-md text-label-md py-xs px-sm rounded opacity-0 group-hover:opacity-100 whitespace-nowrap">$12k</div>
+</div>
+<div class="w-1/12 bg-primary-container rounded-t-sm h-2/5 hover:bg-primary transition-colors"></div>
+<div class="w-1/12 bg-primary-container rounded-t-sm h-3/4 hover:bg-primary transition-colors"></div>
+<div class="w-1/12 bg-primary-container rounded-t-sm h-1/2 hover:bg-primary transition-colors"></div>
+<div class="w-1/12 bg-primary-container rounded-t-sm h-4/5 hover:bg-primary transition-colors"></div>
+<div class="w-1/12 bg-primary-container rounded-t-sm h-full bg-primary hover:bg-primary transition-colors"></div>
+<div class="w-1/12 bg-primary-container rounded-t-sm h-2/3 hover:bg-primary transition-colors"></div>
+</div>
+</div>
+<div class="flex justify-between mt-sm font-label-md text-label-md text-on-surface-variant px-sm">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+</div>
+<!-- Priority Queue Bento -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Priority Queue</h3>
+<button class="text-primary font-label-md text-label-md hover:underline">View All</button>
+</div>
+<div class="flex flex-col gap-sm overflow-y-auto max-h-64">
+<!-- Queue Item -->
+<div class="p-md rounded-lg bg-surface hover:bg-surface-variant transition-colors border border-transparent hover:border-outline-variant flex justify-between items-start cursor-pointer">
+<div>
+<div class="flex items-center gap-xs mb-xs">
+<span class="bg-error-container text-on-error-container font-label-md text-[10px] px-2 py-1 rounded-full uppercase tracking-wide">Flagged</span>
+<span class="font-label-md text-label-md text-on-surface">User ID: #88392</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate w-40">Suspicious multiple large donations.</p>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Queue Item -->
+<div class="p-md rounded-lg bg-surface hover:bg-surface-variant transition-colors border border-transparent hover:border-outline-variant flex justify-between items-start cursor-pointer">
+<div>
+<div class="flex items-center gap-xs mb-xs">
+<span class="bg-secondary-container text-on-secondary-container font-label-md text-[10px] px-2 py-1 rounded-full uppercase tracking-wide">Review</span>
+<span class="font-label-md text-label-md text-on-surface">Med Evac Fund</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate w-40">High-value campaign verification.</p>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Queue Item -->
+<div class="p-md rounded-lg bg-surface hover:bg-surface-variant transition-colors border border-transparent hover:border-outline-variant flex justify-between items-start cursor-pointer">
+<div>
+<div class="flex items-center gap-xs mb-xs">
+<span class="bg-surface-container-high text-on-surface font-label-md text-[10px] px-2 py-1 rounded-full uppercase tracking-wide">Standard</span>
+<span class="font-label-md text-label-md text-on-surface">School Rebuild</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate w-40">Identity document mismatch.</p>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+</body></html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Donation Success | Kaalmo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#f3be52",
+                        "on-primary-fixed": "#001f28",
+                        "on-error": "#ffffff",
+                        "primary": "#00576b",
+                        "tertiary-fixed-dim": "#88d6af",
+                        "inverse-primary": "#82d1ec",
+                        "on-surface-variant": "#3f484c",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-primary-container": "#c2eeff",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#131d1d",
+                        "outline": "#6f797d",
+                        "secondary": "#7b5800",
+                        "on-background": "#131d1d",
+                        "inverse-surface": "#283232",
+                        "primary-fixed-dim": "#82d1ec",
+                        "surface-container-low": "#ebf6f5",
+                        "surface-container": "#e5f0ef",
+                        "tertiary": "#005c3d",
+                        "surface": "#f0fcfb",
+                        "secondary-container": "#fcc759",
+                        "on-secondary-fixed-variant": "#5d4200",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#00677e",
+                        "on-tertiary-container": "#a9f8ce",
+                        "primary-container": "#0b7189",
+                        "on-secondary-container": "#735200",
+                        "outline-variant": "#bec8cc",
+                        "secondary-fixed": "#ffdea4",
+                        "surface-container-highest": "#dae5e4",
+                        "on-secondary-fixed": "#261900",
+                        "tertiary-fixed": "#a4f3ca",
+                        "surface-variant": "#dae5e4",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-dim": "#d1dcdc",
+                        "inverse-on-surface": "#e8f3f2",
+                        "tertiary-container": "#247554",
+                        "surface-bright": "#f0fcfb",
+                        "primary-fixed": "#b4ebff",
+                        "on-primary-fixed-variant": "#004e5f",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#dfeaea",
+                        "background": "#f0fcfb",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "gutter": "24px",
+                        "lg": "24px",
+                        "container-max": "1200px",
+                        "xxl": "48px",
+                        "base": "8px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "numeric-data": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "numeric-data": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            background: #f3be52;
+            top: -20px;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- Navbar -->
+<header class="bg-surface border-b border-outline-variant flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-16 relative z-10">
+<div class="flex items-center gap-sm">
+<span class="font-headline-md text-headline-md font-bold text-primary">Kaalmo</span>
+</div>
+<div class="hidden md:flex gap-lg">
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors" href="#">Explore</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors" href="#">How It Works</a>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center p-md md:p-xl relative">
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" id="confetti-container"></div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl max-w-lg w-full p-xl flex flex-col items-center text-center shadow-sm relative z-10">
+<!-- Success Icon -->
+<div class="w-20 h-20 rounded-full bg-surface-container-low flex items-center justify-center mb-md border border-outline-variant">
+<span class="material-symbols-outlined text-[48px] text-tertiary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<!-- Gratitude Message -->
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Thank You!</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-xl">Your generosity makes a real difference.</p>
+<!-- Donation Details Card -->
+<div class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-md mb-xl flex flex-col gap-sm text-left">
+<div class="flex justify-between items-center border-b border-outline-variant pb-sm">
+<span class="font-label-md text-label-md text-on-surface-variant">Donation Amount</span>
+<span class="font-numeric-data text-numeric-data text-primary">$50.00</span>
+</div>
+<div class="flex justify-between items-center py-xs border-b border-outline-variant pb-sm">
+<span class="font-label-md text-label-md text-on-surface-variant">Campaign</span>
+<span class="font-body-md text-body-md text-on-surface font-medium truncate max-w-[60%]">Emergency Medical Fund for Amina</span>
+</div>
+<div class="flex justify-between items-center pt-xs">
+<span class="font-label-md text-label-md text-on-surface-variant">Transaction Ref</span>
+<span class="font-body-sm text-body-sm text-outline font-mono">TXN-8472-991K</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row gap-md w-full mb-xl">
+<button class="flex-1 bg-primary-container text-on-primary rounded-lg py-sm px-md font-label-md text-label-md flex items-center justify-center gap-xs hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                    Download Receipt
+                </button>
+<button class="flex-1 border border-outline-variant text-primary rounded-lg py-sm px-md font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+                    Back to Explore
+                </button>
+</div>
+<!-- Share Section -->
+<div class="w-full border-t border-outline-variant pt-lg flex flex-col items-center">
+<p class="font-label-md text-label-md text-on-surface-variant mb-md">Share this campaign to multiply your impact</p>
+<div class="flex gap-md">
+<!-- WhatsApp -->
+<button class="w-12 h-12 rounded-full bg-surface border border-outline-variant flex items-center justify-center hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-[24px] text-tertiary-container group-hover:scale-110 transition-transform">chat</span>
+</button>
+<!-- Facebook (Generic Share Icon as placeholder for FB in Material) -->
+<button class="w-12 h-12 rounded-full bg-surface border border-outline-variant flex items-center justify-center hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-[24px] text-primary group-hover:scale-110 transition-transform">share</span>
+</button>
+<!-- Link -->
+<button class="w-12 h-12 rounded-full bg-surface border border-outline-variant flex items-center justify-center hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-[24px] text-on-surface-variant group-hover:scale-110 transition-transform">link</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant py-lg px-gutter w-full">
+<div class="max-w-container-max mx-auto text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 Kaalmo Somalia. Human-centered Trust.</p>
+</div>
+</footer>
+<script>
+        // Lightweight Confetti Effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#00576b', '#fcc759', '#88d6af', '#82d1ec'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti-piece');
+                
+                // Randomize
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.animationDelay = (Math.random() * 2) + 's';
+                
+                container.appendChild(confetti);
+                
+                // Cleanup
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        });
+    </script>
+</body></html>
