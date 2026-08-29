@@ -102,7 +102,7 @@ export default function Home() {
               to="/explore"
               className="text-[14px] text-white hover:underline underline-offset-2 px-md"
             >
-              Browse campaigns for someone needs money
+              Browse campaigns for someone needs money....
             </Link>
           </div>
         </div>
